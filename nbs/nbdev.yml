@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "TinyMLaaS-main"
+  site-url: "https://JeHugawa.github.io/TinyMLaaS-main"
+  description: "Tiny Machine Learning as a Service"
+  repo-branch: main
+  repo-url: "https://github.com/JeHugawa/TinyMLaaS-main"
