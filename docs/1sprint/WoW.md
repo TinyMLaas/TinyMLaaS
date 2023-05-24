@@ -33,7 +33,7 @@
 - Code is merged
 
 ## Product Backlog
-[Click here](https://github.com/orgs/TinyMLaas/projects/2/views/2)
+[Click here](https://github.com/orgs/TinyMLaas/projects/3/views/1)
 
 ## Team Sprint Backlog
 [Click here](https://github.com/orgs/TinyMLaas/projects/2/views/1)
