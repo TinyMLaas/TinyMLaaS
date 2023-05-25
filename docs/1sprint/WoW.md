@@ -28,6 +28,7 @@
 ## Definition of Done
 - Code contains docstrings / openaAPI tags
 - Code passes automated unit / Robot Framework testing
+- Errors are handled properly
 - Code works on staging server
 - Code is reviewed
 - Code is merged
