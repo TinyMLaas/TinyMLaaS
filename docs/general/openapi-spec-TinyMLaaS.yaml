@@ -1,0 +1,192 @@
+openapi: 3.0.2
+info:
+  title: TinyMLaaS
+  description: TinyMLaaS Ecosystem for Machine Learning in IoT
+  version: 0.0.1
+paths:
+#===============
+#DEVICES
+#===============
+  /add_device/:
+    post:
+      tags:
+        - Devices
+      summary: Add Device
+      description: Adds a device
+      operationId: add_device_add_device__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /registered_devices/:
+    get:
+      tags:
+        - Devices
+      summary: List Registered Devices
+      description: Displays registered devices
+      operationId: list_registered_devices_registered_devices__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /remove_device/{device_id}:
+    delete:
+      tags:
+        - Devices
+      summary: Remove Registered Device
+      description: Removes a device
+      operationId: remove_registered_device_remove_device__device_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Device Id
+          name: device_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+#===============
+#DATA
+#===============
+  /dataset_names:
+    get:
+      tags:
+        - Data
+      summary: Get Dataset Names
+      description: Displays existing datasets
+      operationId: get_dataset_names_dataset_names_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+  /dataset_names_size:
+    get:
+      tags:
+        - Data
+      summary: Get Dataset Names Size
+      description: Select a dataset
+      operationId: get_dataset_names_size_dataset_names_size_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+#===============
+#MODEL
+#===============
+#
+#===============
+#TRAINING
+#===============
+#
+#===============
+#COMPILING
+#===============
+#
+#===============
+#INSTALLING
+#===============
+#
+#===============
+#OBSERVING
+#===============
+#
+#===============
+components:
+  schemas:
+    Device:
+      title: Device
+      required:
+        - name
+        - model
+        - description
+      type: object
+      properties:
+        name:
+          title: Name
+          minLength: 1
+          type: string
+        connection:
+          title: Connection
+          minLength: 1
+          type: string
+        installer:
+          title: Installer
+          minLength: 1
+          type: string
+        compiler:
+          title: Compiler
+          minLength: 1
+          type: string
+        model:
+          title: Model
+          minLength: 1
+          type: string
+        description:
+          title: Description
+          minLength: 1
+          type: string
+      description: The request body for device adding
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+tags:
+  - name: Devices
+    description: HTTP request methods for **devices**.
+  - name: Data
+    description: HTTP request methods for **data**.
