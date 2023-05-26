@@ -4,9 +4,9 @@ info:
   description: TinyMLaaS Ecosystem for Machine Learning in IoT
   version: 0.0.1
 paths:
-#===============
-#DEVICES
-#===============
+  #===============
+  #DEVICES
+  #===============
   /add_device/:
     post:
       tags:
@@ -18,20 +18,20 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Device'
+              $ref: "#/components/schemas/Device"
         required: true
       responses:
-        '201':
+        "201":
           description: Successful Response
           content:
             application/json:
               schema: {}
-        '422':
+        "422":
           description: Validation Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
+                $ref: "#/components/schemas/HTTPValidationError"
   /registered_devices/:
     get:
       tags:
@@ -40,7 +40,7 @@ paths:
       description: Displays registered devices
       operationId: list_registered_devices_registered_devices__get
       responses:
-        '200':
+        "200":
           description: Successful Response
           content:
             application/json:
@@ -59,20 +59,20 @@ paths:
           name: device_id
           in: path
       responses:
-        '200':
+        "200":
           description: Successful Response
           content:
             application/json:
               schema: {}
-        '422':
+        "422":
           description: Validation Error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-#===============
-#DATA
-#===============
+                $ref: "#/components/schemas/HTTPValidationError"
+  #===============
+  #DATA
+  #===============
   /dataset_names:
     get:
       tags:
@@ -81,7 +81,7 @@ paths:
       description: Displays existing datasets
       operationId: get_dataset_names_dataset_names_get
       responses:
-        '200':
+        "200":
           description: Successful Response
           content:
             application/json:
@@ -94,7 +94,7 @@ paths:
       description: Select a dataset
       operationId: get_dataset_names_size_dataset_names_size_get
       responses:
-        '200':
+        "200":
           description: Successful Response
           content:
             application/json:
@@ -102,82 +102,84 @@ paths:
 #===============
 #MODEL
 #===============
-#    get:
-#       tags:
-#        - Model
-#       summary: Select model
-#       description: Select a model
-#       operationId: get_models
-#       responses:
-#         '200':
-#           description: Successful Response
-#           content:
-#             application/json:
-#               schema: {}
+
+  /select_model:
+    get:
+       tags:
+        - Model
+       summary: Select model
+       description: Select a model
+       operationId: get_models
+       responses:
+         '200':
+           description: Successful Response
+           content:
+             application/json:
+               schema: {}
 # #===============
 # #TRAINING
 # #===============
-#   /model_setup:
-#     post:
-#       tags:
-#         - Training
-#       summary: Model setup
-#       description: Setup epocs, batch size
-#       operationId: setup_model
-#       responses:
-#         '201':
-#           description: Successful Response
-#           content:
-#             application/json:
-#               schema: {}
+  /model_setup:
+     post:
+       tags:
+         - Training
+       summary: Model setup
+       description: Setup epocs, batch size
+       operationId: setup_model
+       responses:
+         '201':
+           description: Successful Response
+           content:
+             application/json:
+               schema: {}
 # #===============
 # #COMPILING
 # #===============
-# /compile_model:
-#     get:
-#       tags:
-#         - Compiling
-#       summary: Compile model
-#       description: Compiles ML model for MCU
-#       operationId: compile_model
-#       responses:
-#         '200':
-#           description: Successful Response
-#           content:
-#             application/json:
-#               schema: {}
+  /compile_model:
+     get:
+       tags:
+         - Compiling
+       summary: Compile model
+       description: Compiles ML model for MCU
+       operationId: compile_model
+       responses:
+         '200':
+           description: Successful Response
+           content:
+             application/json:
+               schema: {}
 # #===============
 # #INSTALLING
 # #===============
-# /install_model:
-#     get:
-#       tags:
-#         - Installing
-#       summary: Installs compiled model
-#       description: Installs compiled model into MCU
-#       operationId: install_model
-#       responses:
-#         '200':
-#           description: Successful Response
-#           content:
-#             application/json:
-#               schema: {}
+  /install_model:
+     get:
+       tags:
+         - Installing
+       summary: Installs compiled model
+       description: Installs compiled model into MCU
+       operationId: install_model
+       responses:
+         '200':
+           description: Successful Response
+           content:
+             application/json:
+               schema: {}
 # #===============
 # #OBSERVING
 # #===============
-# /observe_deployment:
-#     get:
-#       tags:
-#         - Observing
-#       summary: Calls MCU for observations
-#       description: Calls MCU for observations
-#       operationId: observe_deployment
-#       responses:
-#         '200':
-#           description: Successful Response
-#           content:
-#             application/json:
-#               schema: {}
+  /observe_deployment:
+     get:
+       tags:
+         - Observing
+       summary: Calls MCU for observations
+       description: Calls MCU for observations
+       operationId: observe_deployment
+       responses:
+         '200':
+           description: Successful Response
+           content:
+             application/json:
+               schema: {}
 #===============
 components:
   schemas:
@@ -222,7 +224,7 @@ components:
           title: Detail
           type: array
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: "#/components/schemas/ValidationError"
     ValidationError:
       title: ValidationError
       required:
@@ -249,3 +251,13 @@ tags:
     description: HTTP request methods for **devices**.
   - name: Data
     description: HTTP request methods for **data**.
+  - name: Model
+    description: HTTP request methods for **models**.
+  - name: Training
+    description: HTTP request methods for **training**.
+  - name: Compiling
+    description: HTTP request methods for **compiling**.
+  - name: Installing
+    description: HTTP request methods for **installing**.
+  - name: Observing
+    description: HTTP request methods for **observing**.
