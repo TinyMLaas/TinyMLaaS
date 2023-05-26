@@ -102,23 +102,82 @@ paths:
 #===============
 #MODEL
 #===============
-#
-#===============
-#TRAINING
-#===============
-#
-#===============
-#COMPILING
-#===============
-#
-#===============
-#INSTALLING
-#===============
-#
-#===============
-#OBSERVING
-#===============
-#
+#    get:
+#       tags:
+#        - Model
+#       summary: Select model
+#       description: Select a model
+#       operationId: get_models
+#       responses:
+#         '200':
+#           description: Successful Response
+#           content:
+#             application/json:
+#               schema: {}
+# #===============
+# #TRAINING
+# #===============
+#   /model_setup:
+#     post:
+#       tags:
+#         - Training
+#       summary: Model setup
+#       description: Setup epocs, batch size
+#       operationId: setup_model
+#       responses:
+#         '201':
+#           description: Successful Response
+#           content:
+#             application/json:
+#               schema: {}
+# #===============
+# #COMPILING
+# #===============
+# /compile_model:
+#     get:
+#       tags:
+#         - Compiling
+#       summary: Compile model
+#       description: Compiles ML model for MCU
+#       operationId: compile_model
+#       responses:
+#         '200':
+#           description: Successful Response
+#           content:
+#             application/json:
+#               schema: {}
+# #===============
+# #INSTALLING
+# #===============
+# /install_model:
+#     get:
+#       tags:
+#         - Installing
+#       summary: Installs compiled model
+#       description: Installs compiled model into MCU
+#       operationId: install_model
+#       responses:
+#         '200':
+#           description: Successful Response
+#           content:
+#             application/json:
+#               schema: {}
+# #===============
+# #OBSERVING
+# #===============
+# /observe_deployment:
+#     get:
+#       tags:
+#         - Observing
+#       summary: Calls MCU for observations
+#       description: Calls MCU for observations
+#       operationId: observe_deployment
+#       responses:
+#         '200':
+#           description: Successful Response
+#           content:
+#             application/json:
+#               schema: {}
 #===============
 components:
   schemas:
