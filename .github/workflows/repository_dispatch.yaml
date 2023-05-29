@@ -1,0 +1,6 @@
+name: Repo
+on: repository_dispatch
+
+jobs:
+  Test:
+    run: echo "Success"
