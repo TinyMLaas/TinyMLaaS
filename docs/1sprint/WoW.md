@@ -28,7 +28,7 @@
 - Double quotes " " for Python, in honor of C/C++
 
 ## Definition of Done
-- Code contains docstrings / openaAPI tags
+- Code contains docstrings / openAPI tags
 - Code passes automated unit / Robot Framework testing
 - Errors are handled properly
 - Code works on staging server
