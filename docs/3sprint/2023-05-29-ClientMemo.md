@@ -12,4 +12,5 @@
 ## Proposal for next week
 - Isolation continues: training, compilation, installing, observing (nbdev)
 	- Estimated time 2 weeks
+- Refactor backend structure
 - Database: sqlite
