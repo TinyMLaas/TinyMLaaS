@@ -20,6 +20,8 @@
 - Feature branching
 - Max lifetime of branch is 1 week
 - No one is allowed to merge their own branch -> use pull requests
+  - Branch owners will make PR when they are done working with the branch 
+- The branch owner will delete branch after pull request is merged
 - Changes to documentation can be pushed to main branch without review
 - No hero coding!
 - Clear output (tests etc) from Notebook before pushing
