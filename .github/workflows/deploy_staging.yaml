@@ -12,6 +12,10 @@ jobs:
       #    ssh-keyscan -H ${{ secrets.SSH_HOST_1 }} > ~/.ssh/known_hosts
      - name: connect
        uses: appleboy/ssh-action@v0.1.10
+       with:
+        host: ${{ secrets.SSH_HOST_1 }}
+        username: ${{ secrets.SSH_USER }}
+        password: ${{ secrets.SSH_PASSWD }}
      - name: Change directory
        run: cd Documents
       #    ssh ${{ secrets.SSH_USER }}@{{ secrets.SSH_HOSTS_2 }}
