@@ -5,32 +5,14 @@ jobs:
   Deploy:
     runs-on: ubuntu-latest
     steps:
-    # - name: install ssh keys
-      # run: |
-      #    install -m 600 -D /dev/null ~/.ssh/id_rsa
-      #    echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-      #    ssh-keyscan -H ${{ secrets.SSH_HOST_1 }} > ~/.ssh/known_hosts
      - name: connect
        uses: appleboy/ssh-action@v0.1.10
        with:
         host: ${{ secrets.SSH_HOST_1 }}
         username: ${{ secrets.SSH_USER }}
         password: ${{ secrets.SSH_PASSWD }}
-     - name: Change directory
-       run: cd Documents
-      #    ssh ${{ secrets.SSH_USER }}@{{ secrets.SSH_HOSTS_2 }}
-     #- name: Change to correct user and go to wanted directory
-     #  run: |
-     #     ../../login.sh
-     #     ${{ secrets.SERVER_USER_PASSWD }}
-     #     cd TinyMLaaS
-      #- name: build and deploy
-      #  run: |
-      #    docker compose build --no-cache
-      #    docker compose up -d
-     - name: Disconenct and cleanup
-       run: |
-        exit
-        exit
-        rm -rf ~/.ssh
+        script: |
+          ssh ${{ secrets.SSH_USER }}@{ secrets.SSH_HOSTS_2 }}
+          ./deploy.sh ${{ secrets.SERVER_USER_PASSWD }}
+          exit
           
