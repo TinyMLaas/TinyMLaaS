@@ -12,7 +12,8 @@ jobs:
           ssh-keyscan -H ${{ secrets.SSH_HOST_1 }} > ~/.ssh/known_hosts
       - name: connect
         run: |
-          ssh -J ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_1 }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_2 }}
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_1 }}
+          ssh ${{ secrets.SSH_USER }}@{{ secrets.SSH_HOSTS_2 }}
       - name: Change to correct user and go to wanted directory
         run: |
           ../../login.sh
