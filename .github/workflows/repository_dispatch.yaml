@@ -1,0 +1,8 @@
+name: Repo
+on: repository_dispatch
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Success"
