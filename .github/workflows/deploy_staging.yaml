@@ -12,7 +12,7 @@ jobs:
         username: ${{ secrets.SSH_USER }}
         password: ${{ secrets.SSH_PASSWD }}
         script: |
-          ssh ${{ secrets.SSH_USER }}@{{ secrets.SSH_HOSTS_2 }}
+          ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOSTS_2 }}
           ./deploy.sh ${{ secrets.SERVER_USER_PASSWD }}
           exit
           
