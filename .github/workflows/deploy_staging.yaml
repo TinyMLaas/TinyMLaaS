@@ -11,6 +11,7 @@ jobs:
         host: ${{ secrets.SSH_HOST_1 }}
         username: ${{ secrets.SSH_USER }}
         password: ${{ secrets.SSH_PASSWD }}
+        sync: true
         script: |
           ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_2 }}
           ./deploy.sh ${{ secrets.SERVER_USER_PASSWD }}
