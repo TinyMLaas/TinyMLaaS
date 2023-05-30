@@ -11,8 +11,9 @@ jobs:
       #    echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
       #    ssh-keyscan -H ${{ secrets.SSH_HOST_1 }} > ~/.ssh/known_hosts
      - name: connect
-       run: |
-          sshpass -p ${{ secrets.SSH_PASSWD }} ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_1 }}
+       uses: appleboy/ssh-action@v0.1.10
+     - name: Change directory
+       run: cd Documents
       #    ssh ${{ secrets.SSH_USER }}@{{ secrets.SSH_HOSTS_2 }}
      #- name: Change to correct user and go to wanted directory
      #  run: |
