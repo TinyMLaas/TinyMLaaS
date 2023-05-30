@@ -1,0 +1,31 @@
+name: Repo
+on: repository_dispatch
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: install ssh keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" >> ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SSH_HOST_1 }} > ~/.ssh/known_hosts
+          ssh-keyscan -H ${{ secrets.SSH_HOST_2 }} > ~/.ssh/known_hosts
+      - name: connect
+        run: |
+          ssh -J ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_1 }} ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST_1 }}
+      - name: Change to correct user and go to wanted directory
+        run: |
+          ../../login.sh
+          ${{ secrets.SERVER_USER_PASSWD }}
+          cd TinyMLaaS
+      - name: build and deploy
+        run: |
+          docker compose build --no-cache
+          docker compose up -d
+      - name: Disconenct and cleanup
+        run: |
+          exit
+          exit
+          rm -rf ~/.ssh
+          
