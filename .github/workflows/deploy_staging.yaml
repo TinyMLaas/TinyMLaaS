@@ -24,11 +24,11 @@ jobs:
       - name: Clone repository
         run: |
           git clone https://github.com/TinyMLaas/TinyML-frontend.git
-      - name: Change to frontend dir
-        run: "cd TinyML-frontend"
       - name: Install dependecies
+        working-directory: ./TinyML-frontend
         run: pip install -r requirements.txt
       - name: Run robot tests
+        working-directory: ./TinyML-frontend
         run: python -m robot -d robot_output tests/
       
   Deploy:
