@@ -11,16 +11,15 @@
 
 ## Install
 
-``` sh
-pip install TinyMLaaS_main
-```
+install Requirements
+
+[TODO nbdev instructions]
+
+[TODO mock database]
 
 ## How to use
 
-Fill me in please! Don’t forget code examples:
-
-``` python
-1+1
+``` sh
+nbdev_export
 ```
-
-    2
+then copy the files in TinyMLaaS_main to the backend
