@@ -12,7 +12,6 @@ jobs:
       - uses: isbang/compose-action@v1.4.1
         with:
           compose-file: "./docker-compose.yml"
-          up-flags: "-d"
         env:
           ROBOT: "true"
       - name: Setup chromedriver
