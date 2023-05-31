@@ -1,0 +1,36 @@
+version: '3.3'
+
+services:
+  
+  backend:
+    container_name: tinymlaasbackend
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    ports: 
+      - 0.0.0.0:8000:8000
+    expose: 
+      - "8000"
+    networks:
+      - ohtup
+  
+  frontend:
+    container_name: tinymlaasfrontend
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+    ports:
+      - 0.0.0.0:8501:8501
+    environment:
+      - BACKEND_URL=http://backend:8000
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    expose:
+      - "8501"
+    networks:
+      - ohtup
+
+networks:
+  ohtup:
+    external: true
