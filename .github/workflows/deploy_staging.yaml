@@ -2,7 +2,32 @@ name: Repo
 on: repository_dispatch
 
 jobs:
+  Run-robot-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - uses: isbang/compose-action@v1.4.1
+        with:
+          compose-file: "./docker-compose.yml"
+          up-flags: "-d"
+        env:
+          ROBOT: "true"
+      - name: Clone repository
+        run: |
+          git clone https://github.com/TinyMLaas/TinyML-frontend.git
+      - name: Change to frontend dir
+        run: "cd TinyML-frontend"
+      - name: Install dependecies
+        run: pip install -r requirements.txt
+      - name: Run robot tests
+        run: robot -d robot_output tests/
+      
   Deploy:
+    if: (needs.Run-robot-tests == 'success')
+    needs: Run-robot-tests
     runs-on: ubuntu-latest
     steps:
      - name: connect
