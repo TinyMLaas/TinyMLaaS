@@ -25,4 +25,4 @@ services:
 
 networks:
   default:
-    driver: bridge
+    name: tinyml_network
