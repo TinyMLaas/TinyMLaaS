@@ -1,0 +1,315 @@
+openapi: 3.0.2
+info:
+  title: TinyMLaaS
+  description: TinyMLaaS Ecosystem for Machine Learning in IoT
+  version: 0.0.1
+paths:
+#===============
+#DEVICES
+#===============
+  /devices/:
+    get:
+      tags:
+        - Devices
+      summary: List Registered Devices
+      description: Displays registered devices
+      operationId: list_registered_devices_devices__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response List Registered Devices Devices  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+    post:
+      tags:
+        - Devices
+      summary: Add Device
+      description: Adds a device
+      operationId: add_device_devices__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeviceCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /devices/{device_id}:
+    delete:
+      tags:
+        - Devices
+      summary: Remove Registered Device
+      description: Removes a device
+      operationId: remove_registered_device_devices__device_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Device Id
+          name: device_id
+          in: path
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+#===============
+#DATA
+#===============
+  /data/:
+    get:
+      tags:
+        - Data
+      summary: Get Dataset Names Size
+      description: Select a dataset
+      operationId: get_dataset_names_size_data__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+#===============
+#BRIDGES
+#===============
+  /bridges/:
+    get:
+      tags:
+        - Bridges
+      summary: Get Registered Bridges
+      description: Displays registered Bridges
+      operationId: get_registered_bridges_bridges__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Registered Bridges Bridges  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bridge'
+    post:
+      tags:
+        - Bridges
+      summary: Add Bridge
+      description: Adds a bridge.
+      operationId: add_bridge_bridges__post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BridgeCreate'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bridge'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /bridges/{bridge_id}:
+    delete:
+      tags:
+        - Bridges
+      summary: Remove Registered Bridge
+      description: Removes a Bridge
+      operationId: remove_registered_bridge_bridges__bridge_id__delete
+      parameters:
+        - required: true
+          schema:
+            title: Bridge Id
+          name: bridge_id
+          in: path
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    Bridge:
+      title: Bridge
+      required:
+        - ip_address
+        - id
+      type: object
+      properties:
+        ip_address:
+          title: Ip Address
+          type: string
+          format: ipv4
+        name:
+          title: Name
+          type: string
+        id:
+          title: Id
+          type: integer
+      description: |-
+        If Bridge is in database, it always has an id.
+
+    BridgeCreate:
+      title: BridgeCreate
+      required:
+        - ip_address
+      type: object
+      properties:
+        ip_address:
+          title: Ip Address
+          type: string
+          format: ipv4
+        name:
+          title: Name
+          type: string
+      description: |-
+        When creating a new Bridge, there is yet no id.
+
+    Device:
+      title: Device
+      required:
+        - name
+        - model
+        - description
+        - serial
+        - id
+      type: object
+      properties:
+        name:
+          title: Name
+          minLength: 1
+          type: string
+        connection:
+          title: Connection
+          minLength: 1
+          type: string
+        installer:
+          title: Installer
+          minLength: 1
+          type: string
+        compiler:
+          title: Compiler
+          minLength: 1
+          type: string
+        model:
+          title: Model
+          minLength: 1
+          type: string
+        description:
+          title: Description
+          minLength: 1
+          type: string
+        serial:
+          title: Serial
+          minLength: 1
+          type: string
+        id:
+          title: Id
+          type: integer
+      description: |-
+        If Device is in database, it always has an id.
+
+    DeviceCreate:
+      title: DeviceCreate
+      required:
+        - name
+        - model
+        - description
+        - serial
+      type: object
+      properties:
+        name:
+          title: Name
+          minLength: 1
+          type: string
+        connection:
+          title: Connection
+          minLength: 1
+          type: string
+        installer:
+          title: Installer
+          minLength: 1
+          type: string
+        compiler:
+          title: Compiler
+          minLength: 1
+          type: string
+        model:
+          title: Model
+          minLength: 1
+          type: string
+        description:
+          title: Description
+          minLength: 1
+          type: string
+        serial:
+          title: Serial
+          minLength: 1
+          type: string
+      description: |-
+        When creating a new Device, there is yet no id.
+
+    HTTPValidationError:
+      title: HTTPValidationError
+      type: object
+      properties:
+        detail:
+          title: Detail
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationError'
+    ValidationError:
+      title: ValidationError
+      required:
+        - loc
+        - msg
+        - type
+      type: object
+      properties:
+        loc:
+          title: Location
+          type: array
+          items:
+            anyOf:
+              - type: string
+              - type: integer
+        msg:
+          title: Message
+          type: string
+        type:
+          title: Error Type
+          type: string
+tags:
+  - name: Devices
+    description: HTTP request methods for **devices**.
+  - name: Data
+    description: HTTP request methods for **data**.
+  - name: Bridges
+    description: HTTP request methods for **bridges**.
