@@ -58,5 +58,7 @@ d = { 'settings': { 'branch': 'main',
                                                                                                  'TinyMLaaS_main/training.py'),
                                          'TinyMLaaS_main.training.TrainModel.prediction': ( 'training.html#trainmodel.prediction',
                                                                                             'TinyMLaaS_main/training.py'),
+                                         'TinyMLaaS_main.training.TrainModel.save_models': ( 'training.html#trainmodel.save_models',
+                                                                                             'TinyMLaaS_main/training.py'),
                                          'TinyMLaaS_main.training.TrainModel.train': ( 'training.html#trainmodel.train',
                                                                                        'TinyMLaaS_main/training.py')}}}
