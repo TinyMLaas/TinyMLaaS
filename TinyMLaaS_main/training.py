@@ -111,14 +111,9 @@ class TrainModel:
 
         return model, history, epochs_range
 
-    def save_models(self,model):
-        """saves the model to the database"""
-        #TODO
 
-
-    def prediction(self, model, class_names):
+    def prediction(self, model, class_names: list):
         """Predicts on the image provided in the path.
-
         Args:
             `model` (tflite model): tflite model to be used in the prediction
 
@@ -137,8 +132,11 @@ class TrainModel:
         predictions = model.predict(img_array)
         score = tf.nn.softmax(predictions[0])
 
-        names = { 1 : "human",
-                 2: "not human"}
+        names = {}
+
+        for index, value in enumerate(class_names):
+            names[index] = value
+
         result = ("This image most likely belongs to {} with a {:.2f} percent confidence.".format(names[np.argmax(score)], 100 * np.max(score)))
 
         return img, result
