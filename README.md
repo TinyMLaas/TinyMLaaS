@@ -1,5 +1,5 @@
 # TinyMLaaS
-![GitHub Actions](https://github.com/TinyMLaas/TinyMLaaS/blob/main/.github/workflows/deploy_staging.yaml/badge.svg)
+![GitHub Actions](https://github.com/TinyMLaas/TinyMLaaS/actions/workflows/deploy_staging.yaml/badge.svg)
  - [Backend](https://github.com/JeHugawa/TinyML-backend)
  - [Frontend](https://github.com/JeHugawa/TinyML-frontend)
  - [MCU components](https://github.com/JeHugawa/TinyML-MCU)
