@@ -8,6 +8,7 @@
  - [Way of Working](/docs/1sprint/WoW.md)
  - [Product backlog](https://github.com/users/JeHugawa/projects/2/views/1)
  - [Working hours](https://docs.google.com/spreadsheets/d/1J1mJxM4wm9pnEoq1daXKhHpsEiAHHjz8Hl4N5ZgT6HM/edit#gid=1517018599)
+ - [Database schema](https://dbdiagram.io/d/61b0bee48c901501c0e6e6dc)
 
 
 ## Install
