@@ -31,7 +31,7 @@ jobs:
         run: python -m robot -d robot_output tests/
       
   Deploy:
-    if: (needs.Run-robot-tests == 'success')
+    if: (needs.Run-robot-tests.result == 'success')
     needs: Run-robot-tests
     runs-on: ubuntu-latest
     steps:
