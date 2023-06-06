@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 import tensorflow as tf
-
+import PIL
 
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -21,9 +21,7 @@ from tensorflow.keras.models import Sequential
 # %% ../nbs/training.ipynb 2
 class TrainModel:
 
-    def __init__(self, data_dir, model_path):
-        if not os.path.exists(model_path):
-            os.makedirs(model_path, exist_ok=True)
+    def __init__(self, data_dir):
         self.data_dir = data_dir
 
 
@@ -138,8 +136,12 @@ class TrainModel:
             names[index] = value
 
         result = ("This image most likely belongs to {} with a {:.2f} percent confidence.".format(names[np.argmax(score)], 100 * np.max(score)))
-
-        return img, result
+        
+        img = PIL.Image.open(path)
+        b = BytesIO()
+        img.save(b, format="png")
+            
+        return b, result
 
     def plot_statistics(self, history, epochs_range):
         """Plot model training statistics
