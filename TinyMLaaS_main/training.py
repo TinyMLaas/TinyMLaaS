@@ -21,9 +21,7 @@ from tensorflow.keras.models import Sequential
 # %% ../nbs/training.ipynb 2
 class TrainModel:
 
-    def __init__(self, data_dir, model_path):
-        if not os.path.exists(model_path):
-            os.makedirs(model_path, exist_ok=True)
+    def __init__(self, data_dir):
         self.data_dir = data_dir
 
 
