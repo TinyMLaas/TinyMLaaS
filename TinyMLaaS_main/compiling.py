@@ -12,15 +12,7 @@ import binascii
 
 
 # %% ../nbs/compiling.ipynb 2
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 def convert_model(model_path: str, dataset_path: str, model_params: dict):
-=======
-def convert_model(dataset_path, model_path, model_obj):
->>>>>>> Stashed changes
-=======
-def convert_model(dataset_path, model_path, model_obj):
->>>>>>> Stashed changes
     """Model conversion into TFLite model
     Args:
         
@@ -48,26 +40,24 @@ def convert_model(dataset_path, model_path, model_obj):
     
     print("Kaatuuko tähän?")
     
-    
-    
+    # Tässä on nyt joku häikkä
+    train_ds = tf.keras.utils.image_dataset_from_directory(
+        dataset_path,
+        validation_split=0.2,
+        subset="training",
+        seed=123,
+        image_size=(96,96),#(model_params["img_height"], model_params["img_width"]),
+        batch_size=10,#model_params["batch_size"],
+        color_mode="grayscale",
+        )
     
     def representative_dataset():
-        train_ds = tf.keras.utils.image_dataset_from_directory(
-            dataset_path,
-            validation_split=0.2,
-            subset="training",
-            seed=123,
-            image_size=(96,96),#(model_params["img_height"], model_params["img_width"]),
-            batch_size=10,#model_params["batch_size"],
-            color_mode="grayscale",
-            )
-        
         for images, labels in train_ds.take(96):
             for img in images:
                 input = tf.cast(img, tf.float32)
                 input = tf.reshape(input, [1, input_shape[1],input_shape[2]])
                 print(input)
-                yield([input])
+            yield([input])
 
     converter.representative_dataset = representative_dataset
     tflite_model = converter.convert()
