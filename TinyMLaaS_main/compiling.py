@@ -13,7 +13,11 @@ import binascii
 
 # %% ../nbs/compiling.ipynb 2
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 def convert_model(model_path: str, dataset_path: str, model_params: dict):
+=======
+def convert_model(dataset_path, model_path, model_obj):
+>>>>>>> Stashed changes
 =======
 def convert_model(dataset_path, model_path, model_obj):
 >>>>>>> Stashed changes
