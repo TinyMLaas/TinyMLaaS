@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 import tensorflow as tf
-
+import PIL
 
 from tensorflow import keras
 from tensorflow.keras import layers
@@ -52,7 +52,7 @@ class TrainModel:
         return train_ds, val_ds
 
 
-    def train(self, img_height, img_width, epochs, optim_choice, batch_size):
+    def train(self, img_height, img_width, epochs, optim_choice, batch_size,model_name):
         """Model training
         
         Args:
@@ -106,7 +106,9 @@ class TrainModel:
 
         epochs_range = range(epochs)
 
-
+        #temporary model saving
+        model.save(f'models/{model_name}',overwrite=True)
+        
         return model, history, epochs_range
 
 
@@ -119,7 +121,7 @@ class TrainModel:
             img: image predicted, result: formatted string for the result
         """
 
-        path = f'{self.data_dir}/{class_names[0]}/1.png'
+        path = f'{self.data_dir}{class_names[0]}/1.png'
         model_shape = model.layers[0].input_shape
         img = cv2.imread(path,cv2.IMREAD_GRAYSCALE)
         img = cv2.resize(img, (model_shape[1],model_shape[2]))
@@ -136,8 +138,12 @@ class TrainModel:
             names[index] = value
 
         result = ("This image most likely belongs to {} with a {:.2f} percent confidence.".format(names[np.argmax(score)], 100 * np.max(score)))
-
-        return img, result
+        
+        img = PIL.Image.open(path)
+        b = BytesIO()
+        img.save(b, format="png")
+            
+        return b, result
 
     def plot_statistics(self, history, epochs_range):
         """Plot model training statistics
