@@ -10,6 +10,11 @@ services:
     command: uvicorn main:app --host 0.0.0.0 --root-path /api-TinyMLaaS/
     ports: 
       - 0.0.0.0:8000:8000
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DATABASE_URL=sqlite:///./tiny_mlaas.db 
     expose: 
       - "8000"
     networks:
@@ -24,9 +29,6 @@ services:
       - 0.0.0.0:8501:8501
     environment:
       - BACKEND_URL=http://backend:8000
-    privileged: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
     expose:
       - "8501"
     networks:
