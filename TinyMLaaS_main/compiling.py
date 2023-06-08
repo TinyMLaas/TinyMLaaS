@@ -42,7 +42,7 @@ def convert_model(model_path: str, dataset_path: str, model_params: dict):
     
     # Tässä on nyt joku häikkä
     train_ds = tf.keras.utils.image_dataset_from_directory(
-        dataset_path,
+        f"{dataset_path}/",
         validation_split=0.2,
         subset="training",
         seed=123,
@@ -74,6 +74,7 @@ def convert_to_c_array(bytes)->str:
     array = ["0x" + hexstr[i:i + 2] for i in range(0, len(hexstr), 2)] 
     array = [array[i:i+10] for i in range(0, len(array), 10)] 
     return ",\n  ".join([", ".join(e) for e in array])
+
 
 def convert_model_to_cc(model_path : str):
     """Creates model.cc from model.tflite in folder `model_path`"""
