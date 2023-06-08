@@ -10,47 +10,63 @@ import os
 import pandas as pd
 import binascii
 
+
 # %% ../nbs/compiling.ipynb 2
-def convert_model(train_ds, model_path, model_obj):
+def convert_model(model_path: str, output_path: str, dataset_path: str, model_params: dict, model_name: str):
     """Model conversion into TFLite model
-nbdev
     Args:
-        `train_ds` (_dataset_): Training data used for the quantization process
-        `model_path`: Path to model files
-        `model_obj`: model object, needed for input_shape
+        
     """
 
-    model = f'{model_path}/keras_model'
+    # open model from path
+    model = tf.keras.models.load_model(f"{model_path}/")
     
     # Convert the model to the TensorFlow Lite format without quantization
-    converter = tf.lite.TFLiteConverter.from_saved_model(model)
+    converter = tf.lite.TFLiteConverter.from_saved_model(model_path)
     model_no_quant_tflite = converter.convert()
+    
     # Save the model to disk
-    open(f'{model_path}/model_no_quant.tflite', "wb").write(model_no_quant_tflite)
+    # open(f"{model_path}/model_no_quant.tflite", "wb").write(model_no_quant_tflite)
 
     # Convert the model with quantization.
-    converter = tf.lite.TFLiteConverter.from_saved_model(model)
+    converter = tf.lite.TFLiteConverter.from_saved_model(model_path)
     converter.optimizations = [tf.lite.Optimize.DEFAULT]
     
     converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS_INT8]
     converter.inference_input_type = tf.int8
     converter.inference_output_type = tf.int8
     
-    input_shape = model_obj.layers[0].input_shape
+    input_shape = model.layers[0].input_shape
+    
+    train_ds = tf.keras.utils.image_dataset_from_directory(
+        f"{dataset_path}/",
+        validation_split=0.2,
+        subset="training",
+        seed=123,
+        image_size=(model_params["img_height"], model_params["img_width"]),
+        batch_size=model_params["batch_size"],
+        color_mode="grayscale",
+        )
     
     def representative_dataset():
         for images, labels in train_ds.take(96):
             for img in images:
                 input = tf.cast(img, tf.float32)
                 input = tf.reshape(input, [1, input_shape[1],input_shape[2]])
-                yield([input])
+            yield([input])
 
     converter.representative_dataset = representative_dataset
     tflite_model = converter.convert()
 
-    # Save the model.
-    with open(f'{model_path}/model.tflite', 'wb') as f:
-        f.write(tflite_model)
+    #Save the model.
+    compiled_models_path = f"{output_path}{model_name}"
+    
+    if not os.path.exists(compiled_models_path):
+       os.makedirs(compiled_models_path)
+    
+    with open(f"{compiled_models_path}/model.tflite", "wb") as f:
+       f.write(tflite_model)
+
 
 def convert_to_c_array(bytes)->str:
     """C array conversion"""
@@ -60,13 +76,15 @@ def convert_to_c_array(bytes)->str:
     array = [array[i:i+10] for i in range(0, len(array), 10)] 
     return ",\n  ".join([", ".join(e) for e in array])
 
+
 def convert_model_to_cc(model_path : str):
     """Creates model.cc from model.tflite in folder `model_path`"""
-    tflite_binary = open(f'{model_path}/model.tflite', 'rb').read()
+    tflite_binary = open(f"{model_path}/model.tflite", "rb").read()
     ascii_bytes = convert_to_c_array(tflite_binary)
     header_file = "#include \"person_detect_model_data.h\"\nconst unsigned char model_tflite[] = {\n  " + ascii_bytes + "\n};\nunsigned int model_tflite_len = " + str(len(tflite_binary)) + ";"
     with open(f"{model_path}/model.cc", "w") as f:
         f.write(header_file)
+
 
 def plot_size(model_path):
     """Plots the size difference before and after quantization
@@ -76,8 +94,8 @@ def plot_size(model_path):
         pandas dataframe: Pandas dataframe containing information
     """
 
-    size_no_quant_tflite = os.path.getsize(f'{model_path}/model_no_quant.tflite')
-    size_tflite = os.path.getsize(f'{model_path}/model.tflite')
+    size_no_quant_tflite = os.path.getsize(f"{model_path}/model_no_quant.tflite")
+    size_tflite = os.path.getsize(f"{model_path}/model.tflite")
     
     frame = pd.DataFrame.from_records(
         [["TensorFlow Lite", f"{size_no_quant_tflite} bytes "],
