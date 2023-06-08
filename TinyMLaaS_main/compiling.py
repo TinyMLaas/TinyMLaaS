@@ -12,7 +12,7 @@ import binascii
 
 
 # %% ../nbs/compiling.ipynb 2
-def convert_model(model_path: str, dataset_path: str, model_params: dict, model_name: str):
+def convert_model(model_path: str, output_path: str, dataset_path: str, model_params: dict, model_name: str):
     """Model conversion into TFLite model
     Args:
         
@@ -59,7 +59,7 @@ def convert_model(model_path: str, dataset_path: str, model_params: dict, model_
     tflite_model = converter.convert()
 
     #Save the model.
-    compiled_models_path = f"compiled_models/{model_name}"
+    compiled_models_path = f"{output_path}{model_name}"
     
     if not os.path.exists(compiled_models_path):
        os.makedirs(compiled_models_path)
