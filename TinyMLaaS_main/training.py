@@ -52,7 +52,7 @@ class TrainModel:
         return train_ds, val_ds
 
 
-    def train(self, img_height, img_width, epochs, optim_choice, batch_size, model_name):
+    def train(self, img_height, img_width, epochs, optim_choice, batch_size, model_path):
         """Model training
         
         Args:
@@ -107,7 +107,7 @@ class TrainModel:
         epochs_range = range(epochs)
 
         #temporary model saving
-        model.save(f'tensorflow_models/{model_name}',overwrite=True)
+        model.save(model_path,overwrite=True)
         
         return model, history, epochs_range
 
