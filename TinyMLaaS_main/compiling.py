@@ -12,7 +12,7 @@ import binascii
 
 
 # %% ../nbs/compiling.ipynb 2
-def convert_model(model_path: str, dataset_path: str, model_params: dict):
+def convert_model(model_path: str, dataset_path: str, model_params: dict, model_name: str):
     """Model conversion into TFLite model
     Args:
         
@@ -26,7 +26,7 @@ def convert_model(model_path: str, dataset_path: str, model_params: dict):
     model_no_quant_tflite = converter.convert()
     
     # Save the model to disk
-    # open(f'{model_path}/model_no_quant.tflite', "wb").write(model_no_quant_tflite)
+    # open(f"{model_path}/model_no_quant.tflite", "wb").write(model_no_quant_tflite)
 
     # Convert the model with quantization.
     converter = tf.lite.TFLiteConverter.from_saved_model(model_path)
@@ -38,9 +38,6 @@ def convert_model(model_path: str, dataset_path: str, model_params: dict):
     
     input_shape = model.layers[0].input_shape
     
-    print("Kaatuuko tähän?")
-    
-    # Tässä on nyt joku häikkä
     train_ds = tf.keras.utils.image_dataset_from_directory(
         f"{dataset_path}/",
         validation_split=0.2,
@@ -61,9 +58,14 @@ def convert_model(model_path: str, dataset_path: str, model_params: dict):
     converter.representative_dataset = representative_dataset
     tflite_model = converter.convert()
 
-    # Save the model.
-    with open(f'{model_path}/model.tflite', 'wb') as f:
-        f.write(tflite_model)
+    #Save the model.
+    compiled_models_path = f"compiled_models/{model_name}"
+    
+    if not os.path.exists(compiled_models_path):
+       os.makedirs(compiled_models_path)
+    
+    with open(f"{compiled_models_path}/model.tflite", "wb") as f:
+       f.write(tflite_model)
 
 
 def convert_to_c_array(bytes)->str:
@@ -77,7 +79,7 @@ def convert_to_c_array(bytes)->str:
 
 def convert_model_to_cc(model_path : str):
     """Creates model.cc from model.tflite in folder `model_path`"""
-    tflite_binary = open(f'{model_path}/model.tflite', 'rb').read()
+    tflite_binary = open(f"{model_path}/model.tflite", "rb").read()
     ascii_bytes = convert_to_c_array(tflite_binary)
     header_file = "#include \"person_detect_model_data.h\"\nconst unsigned char model_tflite[] = {\n  " + ascii_bytes + "\n};\nunsigned int model_tflite_len = " + str(len(tflite_binary)) + ";"
     with open(f"{model_path}/model.cc", "w") as f:
@@ -92,8 +94,8 @@ def plot_size(model_path):
         pandas dataframe: Pandas dataframe containing information
     """
 
-    size_no_quant_tflite = os.path.getsize(f'{model_path}/model_no_quant.tflite')
-    size_tflite = os.path.getsize(f'{model_path}/model.tflite')
+    size_no_quant_tflite = os.path.getsize(f"{model_path}/model_no_quant.tflite")
+    size_tflite = os.path.getsize(f"{model_path}/model.tflite")
     
     frame = pd.DataFrame.from_records(
         [["TensorFlow Lite", f"{size_no_quant_tflite} bytes "],
