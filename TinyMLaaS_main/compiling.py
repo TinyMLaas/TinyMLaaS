@@ -66,6 +66,8 @@ def convert_model(model_path: str, output_path: str, dataset_path: str, model_pa
     
     with open(f"{compiled_models_path}/model.tflite", "wb") as f:
        f.write(tflite_model)
+       
+    convert_model_to_cc(compiled_models_path)
 
 
 def convert_to_c_array(bytes)->str:
@@ -81,7 +83,7 @@ def convert_model_to_cc(model_path : str):
     """Creates model.cc from model.tflite in folder `model_path`"""
     tflite_binary = open(f"{model_path}/model.tflite", "rb").read()
     ascii_bytes = convert_to_c_array(tflite_binary)
-    header_file = "#include \"person_detect_model_data.h\"\nconst unsigned char model_tflite[] = {\n  " + ascii_bytes + "\n};\nunsigned int model_tflite_len = " + str(len(tflite_binary)) + ";"
+    header_file = "#include \"model.h\"\nconst unsigned char model_tflite[] = {\n  " + ascii_bytes + "\n};\nunsigned int model_tflite_len = " + str(len(tflite_binary)) + ";"
     with open(f"{model_path}/model.cc", "w") as f:
         f.write(header_file)
 
