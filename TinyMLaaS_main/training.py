@@ -121,7 +121,8 @@ class TrainModel:
             img: image predicted, result: formatted string for the result
         """
 
-        path = f'{self.data_dir}{class_names[0]}/1.png'
+        pic = os.listdir(f'{self.data_dir}{class_names[0]}/')[0]
+        path = f'{self.data_dir}{class_names[0]}/{pic}'
         model_shape = model.layers[0].input_shape
         img = cv2.imread(path,cv2.IMREAD_GRAYSCALE)
         img = cv2.resize(img, (model_shape[1],model_shape[2]))
