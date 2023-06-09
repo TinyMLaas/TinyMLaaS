@@ -4,9 +4,6 @@ info:
   description: TinyMLaaS Ecosystem for Machine Learning in IoT
   version: 0.0.1
 paths:
-#===============
-#DEVICES
-#===============
   /devices/:
     get:
       tags:
@@ -71,25 +68,104 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-#===============
-#DATA
-#===============
-  /data/:
+  /datasets/:
     get:
       tags:
         - Data
-      summary: Get Dataset Names Size
-      description: Select a dataset
-      operationId: get_dataset_names_size_data__get
+      summary: Get Datasets
+      description: Displays existing datasets
+      operationId: get_datasets_datasets__get
       responses:
         '200':
           description: Successful Response
           content:
             application/json:
-              schema: {}
-#===============
-#BRIDGES
-#===============
+              schema:
+                title: Response Get Datasets Datasets  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dataset'
+  /models/datasets/{dataset_id}:
+    post:
+      summary: Train Model
+      description: Train a model based on dataset_id
+      operationId: train_model_models_datasets__dataset_id__post
+      parameters:
+        - required: true
+          schema:
+            title: Dataset Id
+            type: integer
+          name: dataset_id
+          in: path
+        - required: true
+          schema:
+            $ref: '#/components/schemas/LossFunctions'
+          name: lossfunc
+          in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelBase'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelTrained'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /models/datasets/:
+    post:
+      summary: Train Model Dataset Id In Training Data
+      description: Train a model
+      operationId: train_model_dataset_id_in_training_data_models_datasets__post
+      parameters:
+        - required: true
+          schema:
+            $ref: '#/components/schemas/LossFunctions'
+          name: lossfunc
+          in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelBase'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelTrained'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /models/:
+    get:
+      summary: Get All Models
+      description: Return all models
+      operationId: get_all_models_models__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get All Models Models  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/Model'
   /bridges/:
     get:
       tags:
@@ -154,6 +230,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /compiled_models/models/{model_id}:
+    post:
+      tags:
+        - Compiled models
+      summary: Compile Model
+      description: Compile an existing model
+      operationId: compile_model_compiled_models_models__model_id__post
+      parameters:
+        - required: true
+          schema:
+            title: Model Id
+          name: model_id
+          in: path
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompiledModel'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /compiled_models/:
+    get:
+      tags:
+        - Compiled models
+      summary: Get Compiled Models
+      description: Display compiled models
+      operationId: get_compiled_models_compiled_models__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Compiled Models Compiled Models  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/CompiledModel'
 components:
   schemas:
     Bridge:
@@ -175,7 +294,7 @@ components:
           type: integer
       description: |-
         If Bridge is in database, it always has an id.
-
+            
     BridgeCreate:
       title: BridgeCreate
       required:
@@ -191,7 +310,66 @@ components:
           type: string
       description: |-
         When creating a new Bridge, there is yet no id.
-
+            
+    CompiledModel:
+      title: CompiledModel
+      required:
+        - model_id
+        - model_path
+        - id
+      type: object
+      properties:
+        created:
+          title: Created
+          type: string
+          format: date-time
+        compiler_id:
+          title: Compiler Id
+          type: integer
+        model_id:
+          title: Model Id
+          type: integer
+        model_path:
+          title: Model Path
+          type: string
+        id:
+          title: Id
+          type: integer
+      description: |-
+        If CompiledModel is in database, it always has an id.
+            
+    Dataset:
+      title: Dataset
+      required:
+        - path
+        - name
+        - description
+        - size
+        - id
+      type: object
+      properties:
+        path:
+          title: Path
+          minLength: 1
+          type: string
+        name:
+          title: Name
+          minLength: 1
+          type: string
+        description:
+          title: Description
+          minLength: 1
+          type: string
+        size:
+          title: Size
+          minLength: 1
+          type: string
+        id:
+          title: Id
+          type: integer
+      description: |-
+        If Bridge is in database, it always has an id.
+            
     Device:
       title: Device
       required:
@@ -235,7 +413,7 @@ components:
           type: integer
       description: |-
         If Device is in database, it always has an id.
-
+            
     DeviceCreate:
       title: DeviceCreate
       required:
@@ -275,7 +453,7 @@ components:
           type: string
       description: |-
         When creating a new Device, there is yet no id.
-
+            
     HTTPValidationError:
       title: HTTPValidationError
       type: object
@@ -285,6 +463,109 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ValidationError'
+    LossFunctions:
+      title: LossFunctions
+      enum:
+        - Categorical crossentropy
+        - Sparse Categorical crossentropy
+      type: string
+      description: |-
+        Loss functions available in training
+            
+    Model:
+      title: Model
+      required:
+        - parameters
+        - description
+        - id
+        - model_path
+      type: object
+      properties:
+        dataset_id:
+          title: Dataset Id
+          type: integer
+        parameters:
+          title: Parameters
+          type: object
+        description:
+          title: Description
+          type: string
+        id:
+          title: Id
+          type: integer
+        created:
+          title: Created
+          type: string
+          format: date-time
+        model_path:
+          title: Model Path
+          type: string
+      description: |-
+        If Model is in database, it always has an id.
+            
+    ModelBase:
+      title: ModelBase
+      required:
+        - parameters
+        - description
+      type: object
+      properties:
+        dataset_id:
+          title: Dataset Id
+          type: integer
+        parameters:
+          title: Parameters
+          type: object
+        description:
+          title: Description
+          type: string
+      description: |-
+        Base for Model trained on Tensorflow. Lacks id as it is assigned by database
+            
+    ModelTrained:
+      title: ModelTrained
+      required:
+        - parameters
+        - description
+        - id
+        - model_path
+        - prediction_image
+        - prediction
+        - statistic_image
+      type: object
+      properties:
+        dataset_id:
+          title: Dataset Id
+          type: integer
+        parameters:
+          title: Parameters
+          type: object
+        description:
+          title: Description
+          type: string
+        id:
+          title: Id
+          type: integer
+        created:
+          title: Created
+          type: string
+          format: date-time
+        model_path:
+          title: Model Path
+          type: string
+        prediction_image:
+          title: Prediction Image
+          type: string
+        prediction:
+          title: Prediction
+          type: string
+        statistic_image:
+          title: Statistic Image
+          type: string
+          format: binary
+      description: |-
+        If Model is in database, it always has an id.
+            
     ValidationError:
       title: ValidationError
       required:
@@ -313,3 +594,5 @@ tags:
     description: HTTP request methods for **data**.
   - name: Bridges
     description: HTTP request methods for **bridges**.
+  - name: Compiled models
+    description: HTTP request methods for **compiled models**.
