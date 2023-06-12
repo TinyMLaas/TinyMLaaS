@@ -29,4 +29,4 @@
 - Apply a real world use case
 - Add automated workflow
 - 1 and half week sprint
-  - Next meeting thursday 22.06.2023
+  - Next meeting thursday 22.06.2023 10:00
