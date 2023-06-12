@@ -12,6 +12,7 @@
   - Save trained models
   - Save compiled models
   - Ability to select already trained and compiled models
+- Cli generation explored
 
 ## Demo
 
