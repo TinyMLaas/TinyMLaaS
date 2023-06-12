@@ -1,7 +1,7 @@
 FROM python:3.10
 
 # Dependency of pyusb
-RUN apt update && apt-get install libusb-1.0
+RUN apt update && apt-get install -y usbutils
 
 EXPOSE 8501
 

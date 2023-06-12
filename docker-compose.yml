@@ -10,11 +10,8 @@ services:
     command: uvicorn main:app --host 0.0.0.0
     ports: 
       - 8000:8000
-    privileged: true
     environment:
       - DATABASE_URL=sqlite:///./tiny_mlaas.db 
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
   
   frontend:
     build:
@@ -24,7 +21,10 @@ services:
       - 0.0.0.0:8501:8501
     environment:
       - BACKEND_URL=http://tinymlaasbackend:8000
-      - ROBOT_TESTS=${ROBOT}
+      - ROBOT_TESTS="false"
+    privileged: true
+    volumes:
+     - /dev/bus/usb:/dev/bus/usb
 
 networks:
   default:
