@@ -12,6 +12,7 @@
   - Save trained models
   - Save compiled models
   - Ability to select already trained and compiled models
+- Cli generation explored
 
 ## Demo
 
@@ -27,3 +28,5 @@
   - Observation
 - Apply a real world use case
 - Add automated workflow
+- 1 and half week sprint
+  - Next meeting thursday 22.06.2023 10:00
