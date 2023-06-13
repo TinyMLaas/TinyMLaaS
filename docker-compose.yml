@@ -21,7 +21,7 @@ services:
       - 0.0.0.0:8501:8501
     environment:
       - BACKEND_URL=http://tinymlaasbackend:8000
-      - ROBOT_TESTS="false"
+      - ROBOT_TESTS=${ROBOT}
     privileged: true
     volumes:
      - /dev/bus/usb:/dev/bus/usb
