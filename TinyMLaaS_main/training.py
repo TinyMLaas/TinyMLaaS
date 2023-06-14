@@ -75,16 +75,18 @@ class TrainModel:
 
 
         # Build model
-        model = Sequential([
-            layers.Reshape(target_shape=(img_width, img_height, 1), input_shape=(img_width, img_height)),
-            layers.experimental.preprocessing.Rescaling(1./255),
-            layers.Conv2D(16, 3, activation='relu', padding='SAME',),
-            layers.MaxPooling2D(pool_size=(2, 2)),
-            layers.DepthwiseConv2D(8, 3, activation='relu', padding='SAME'),
-            layers.MaxPooling2D(pool_size=(2, 2)),
-            layers.Flatten(),
-            layers.Dense(units=2, activation='softmax'),
-          ])
+        model = Sequential()
+        
+        model.add(layers.Reshape(target_shape=(img_width, img_height, 1), input_shape=(img_width, img_height)))
+        model.add(layers.experimental.preprocessing.Rescaling(1./255))
+        model.add(layers.Conv2D(16, 3, activation='relu', padding='SAME',))
+        model.add(layers.MaxPooling2D(pool_size=(2, 2)))
+        model.add(layers.DepthwiseConv2D(8, 3, activation='relu', padding='SAME'))
+        model.add(layers.MaxPooling2D(pool_size=(2, 2)))
+        model.add(layers.Flatten())
+        model.add(layers.Dense(units=2, activation='softmax'))
+        model.add(layers.BatchNormalization())
+        model.add(layers.Activation("relu"))
 
         if optim_choice == "Categorical crossentropy":
             loss_fn = keras.losses.CategoricalCrossentropy(from_logits=True)
@@ -121,8 +123,8 @@ class TrainModel:
             img: image predicted, result: formatted string for the result
         """
 
-        pic = os.listdir(f'{self.data_dir}{class_names[0]}/')[0]
-        path = f'{self.data_dir}{class_names[0]}/{pic}'
+        pic = os.listdir(f'{self.data_dir}{class_names[1]}/')[0]
+        path = f'{self.data_dir}{class_names[1]}/{pic}'
         model_shape = model.layers[0].input_shape
         img = cv2.imread(path,cv2.IMREAD_GRAYSCALE)
         img = cv2.resize(img, (model_shape[1],model_shape[2]))
