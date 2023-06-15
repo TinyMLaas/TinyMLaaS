@@ -88,7 +88,7 @@ class TrainModel:
         model = Sequential()
         
         model.add(layers.Reshape(target_shape=(img_width, img_height, 1), input_shape=(img_width, img_height)))
-        model.add(layers.experimental.preprocessing.Rescaling(1./255))
+        # model.add(layers.experimental.preprocessing.Rescaling(1./255))
         model.add(layers.Conv2D(16, 3, activation='relu', padding='SAME',))
         model.add(layers.MaxPooling2D(pool_size=(2, 2)))
         model.add(layers.DepthwiseConv2D(8, 3, activation='relu', padding='SAME'))
@@ -99,6 +99,8 @@ class TrainModel:
         model.add(layers.Activation("relu"))
 
         if optim_choice == "Categorical crossentropy":
+            train = train.map(lambda x, y: (x, tf.one_hot(y, depth=2)))
+            test = test.map(lambda x, y: (x, tf.one_hot(y, depth=2)))
             loss_fn = keras.losses.CategoricalCrossentropy(from_logits=True)
         elif optim_choice == "Sparse Categorical crossentropy":
             loss_fn = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
