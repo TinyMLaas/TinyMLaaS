@@ -88,7 +88,7 @@ class TrainModel:
         model = Sequential()
         
         model.add(layers.Reshape(target_shape=(img_width, img_height, 1), input_shape=(img_width, img_height)))
-        # model.add(layers.experimental.preprocessing.Rescaling(1./255))
+        model.add(layers.experimental.preprocessing.Rescaling(1./255))
         model.add(layers.Conv2D(16, 3, activation='relu', padding='SAME',))
         model.add(layers.MaxPooling2D(pool_size=(2, 2)))
         model.add(layers.DepthwiseConv2D(8, 3, activation='relu', padding='SAME'))
