@@ -16,6 +16,7 @@ import PIL
 
 from tensorflow import keras
 from tensorflow.keras import layers
+from tensorflow.keras import regularizers
 from tensorflow.keras.models import Sequential
 
 # %% ../nbs/training.ipynb 2
@@ -66,6 +67,15 @@ class TrainModel:
         """
         train_ds, validation_ds = self.load_data(img_height, img_width, batch_size)
         class_names = train_ds.class_names
+        
+        data_augmentation = keras.Sequential(
+            [
+                layers.RandomFlip("horizontal"),
+                layers.RandomRotation(0.1),
+            ]
+        )
+        
+        train_ds = train_ds.map(lambda img, label: (data_augmentation(img), label),num_parallel_calls=tf.data.AUTOTUNE,)
 
 
         #Enable caching for training
