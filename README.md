@@ -16,9 +16,11 @@
 
 In order to run the project see instructions for each component:
 
-[Backend instructions](https://github.com/TinyMLaas/TinyML-backend#instructions-for-running-the-application)
+[Backend](https://github.com/TinyMLaas/TinyML-backend#instructions-for-running-the-application)
 
 [Frontend](https://github.com/TinyMLaas/TinyML-frontend)
+
+[MCUs](https://github.com/TinyMLaas/TinyML-MCU)
 
 <!---
 ## Install
