@@ -1,17 +1,20 @@
 version: '3.3'
 
 services:
+
   
   backend:
     container_name: tinymlaasbackend
     build:
       context: .
-      dockerfile: backend.Dockerfile
-    command: uvicorn main:app --host 0.0.0.0
+      dockerfile: backend_no_tf.Dockerfile
+    runtime: sysbox-runc
+    hostname: syscont
     ports: 
       - 8000:8000
     environment:
-      - DATABASE_URL=sqlite:///./tiny_mlaas.db 
+      - DATABASE_URL=sqlite:///./tiny_mlaas.db
+    
   
   frontend:
     build:

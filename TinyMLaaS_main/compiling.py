@@ -9,6 +9,8 @@ import tensorflow as tf
 import os
 import pandas as pd
 import binascii
+import json
+import sys
 
 
 # %% ../nbs/compiling.ipynb 2
@@ -59,7 +61,7 @@ def convert_model(model_path: str, output_path: str, dataset_path: str, model_pa
     tflite_model = converter.convert()
 
     #Save the model.
-    compiled_models_path = f"{output_path}{model_name}"
+    compiled_models_path = f"{output_path}/{model_name}"
     
     if not os.path.exists(compiled_models_path):
        os.makedirs(compiled_models_path)
@@ -106,3 +108,4 @@ def plot_size(model_path):
 
     return frame
 
+convert_model(model_path=sys.argv[1], output_path=sys.argv[2], dataset_path=sys.argv[3], model_params=json.loads(sys.argv[4]), model_name=sys.argv[5])
