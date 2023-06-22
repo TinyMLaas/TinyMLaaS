@@ -108,4 +108,10 @@ def plot_size(model_path):
 
     return frame
 
-convert_model(model_path=sys.argv[1], output_path=sys.argv[2], dataset_path=sys.argv[3], model_params=json.loads(sys.argv[4]), model_name=sys.argv[5])
+convert_model(
+    model_path=sys.argv[1], 
+    output_path=sys.argv[2], 
+    dataset_path=sys.argv[3], 
+    model_params=json.loads(sys.argv[4]), 
+    model_name=sys.argv[5]
+    )
