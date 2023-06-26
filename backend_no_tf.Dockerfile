@@ -8,9 +8,9 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &
 
 WORKDIR /TinyML-backend
 
-RUN git remote add main https://github.com/TinyMLaas/TinyMLaaS.git && \
-    git fetch main && \
-    git checkout main/dockerize_tensorflow -- TinyMLaaS_main && \
+# RUN git remote add main https://github.com/TinyMLaas/TinyMLaaS.git && \
+#     git fetch main && \
+#     git checkout main/dockerize_tensorflow -- TinyMLaaS_main
 
 RUN touch tiny_mlaas.db && sqlite3 tiny_mlaas.db '.read schema.sql' '.read populate.sql' && \
     pip install --default-timeout=1000 --upgrade --ignore-installed packaging -r requirements.txt && \
