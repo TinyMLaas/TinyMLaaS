@@ -6,7 +6,7 @@ __all__ = ['TrainModel']
 # %% ../nbs/training.ipynb 1
 import os
 from io import BytesIO
-
+import sys
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -67,14 +67,14 @@ class TrainModel:
         """
         train_ds, validation_ds = self.load_data(img_height, img_width, batch_size)
         class_names = train_ds.class_names
-        
+
         data_augmentation = keras.Sequential(
             [
                 layers.RandomFlip("horizontal"),
                 layers.RandomRotation(0.1),
             ]
         )
-        
+
         train_ds = train_ds.map(lambda img, label: (data_augmentation(img), label),num_parallel_calls=tf.data.AUTOTUNE,)
 
 
@@ -122,7 +122,7 @@ class TrainModel:
 
         #temporary model saving
         model.save(model_path,overwrite=True)
-        
+
         return model, history, epochs_range
 
 
@@ -193,3 +193,20 @@ class TrainModel:
         stats.savefig(buff, format="png")
 
         return buff
+
+    def run_training():
+        
+        dataset_path = sys.argv[1]
+        img_heigth = sys.argv[2]
+        img_width = sys.argv[3]
+        epochs = sys.argv[4]
+        lossfunc = sys.argv[5]
+        batch_size = sys.argv[6] 
+        model_path = sys.argv[7]
+        
+        
+        train_model = TrainModel(dataset_path)
+        
+        train_model.train(img_heigth, img_width, epochs, lossfunc, batch_size, model_path)
+    
+    run_training()
