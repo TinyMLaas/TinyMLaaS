@@ -16,8 +16,7 @@ import PIL
 
 from tensorflow import keras
 from tensorflow.keras import layers
-from tensorflow.keras import regularizers
-from tensorflow.keras.models import Sequential
+from tensorflow.keras.models import Sequential, load_model
 
 # %% ../nbs/training.ipynb 2
 class TrainModel:
@@ -67,15 +66,6 @@ class TrainModel:
         """
         train_ds, validation_ds = self.load_data(img_height, img_width, batch_size)
         class_names = train_ds.class_names
-        
-        data_augmentation = keras.Sequential(
-            [
-                layers.RandomFlip("horizontal"),
-                layers.RandomRotation(0.1),
-            ]
-        )
-        
-        train_ds = train_ds.map(lambda img, label: (data_augmentation(img), label),num_parallel_calls=tf.data.AUTOTUNE,)
 
 
         #Enable caching for training
@@ -99,8 +89,6 @@ class TrainModel:
         model.add(layers.Activation("relu"))
 
         if optim_choice == "Categorical crossentropy":
-            train = train.map(lambda x, y: (x, tf.one_hot(y, depth=2)))
-            test = test.map(lambda x, y: (x, tf.one_hot(y, depth=2)))
             loss_fn = keras.losses.CategoricalCrossentropy(from_logits=True)
         elif optim_choice == "Sparse Categorical crossentropy":
             loss_fn = keras.losses.SparseCategoricalCrossentropy(from_logits=True)
@@ -125,6 +113,46 @@ class TrainModel:
         
         return model, history, epochs_range
 
+
+    def continue_training(self, img_height, img_width, epochs, batch_size, model_path):
+        """Model training
+        
+        Args:
+            `img_height` (_int_): image pixel height
+            `img_width` (_int_): image pixel width
+            `epochs` (_int_): Number of epochs to train
+            `optim_choice` (_string_): Loss function to be used
+            `batch_size` (_int_): Batch size to be used
+            `model_path` (_string_): Location for fetching the model 
+            
+
+        Returns:
+            keras_model, statistics
+        """
+        train_ds, validation_ds = self.load_data(img_height, img_width, batch_size)
+        class_names = train_ds.class_names
+
+        #Enable caching for training
+        AUTOTUNE = tf.data.AUTOTUNE
+        train = train_ds.cache().prefetch(buffer_size=AUTOTUNE)
+        test = validation_ds.cache().prefetch(buffer_size=AUTOTUNE)
+
+        model = load_model(model_path)
+
+        history = model.fit(
+          train,
+          validation_data=test,
+          epochs=epochs
+        )
+
+        epochs_range = range(epochs)
+
+        #temporary model saving
+        model.save(model_path,overwrite=True)
+        
+        return model, history, epochs_range
+
+        
 
     def prediction(self, model, class_names: list):
         """Predicts on the image provided in the path.
