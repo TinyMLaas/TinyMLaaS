@@ -1,22 +1,16 @@
-FROM alpine:3.18
-
+FROM nestybox/ubuntu-jammy-docker
 EXPOSE 8000
 
-COPY start_docker_daemon.sh .
-RUN chmod u+x start_docker_daemon.sh
-
-RUN apk update && apk upgrade && apk add docker py3-pip sqlite py3-opencv git
-
-COPY /TinyML-backend /TinyML-backend
+ENV TZ=Europe/Helsinki
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone &&\
+    apt-get update && apt-get install -y git sqlite3 pip python3-opencv &&\
+    git clone -b dockerize_tensorflow https://github.com/TinyMLaas/TinyML-backend
 
 WORKDIR /TinyML-backend
 
-RUN   touch tiny_mlaas.db && sqlite3 tiny_mlaas.db '.read schema.sql' '.read populate.sql'
+RUN touch tiny_mlaas.db && sqlite3 tiny_mlaas.db '.read schema.sql' '.read populate.sql' && \
+    pip install --default-timeout=1000 --upgrade --ignore-installed packaging -r requirements.txt && \
+    chmod u+x start_docker_daemon.sh
 
-# RUN   git remote add main https://github.com/TinyMLaas/TinyMLaaS.git
-# RUN   git fetch main
-# RUN   git checkout main/main -- TinyMLaaS_main
+CMD ./start_docker_daemon.sh ; uvicorn main:app --host 0.0.0.0
 
-RUN   pip install --default-timeout=1000 --upgrade --ignore-installed packaging -r requirements.txt
-
-CMD ../start_docker_daemon.sh ; uvicorn main:app --host 0.0.0.0
