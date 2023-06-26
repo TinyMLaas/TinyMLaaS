@@ -11,6 +11,7 @@
  - [Product backlog](https://github.com/users/JeHugawa/projects/2/views/1)
  - [Working hours](https://docs.google.com/spreadsheets/d/1J1mJxM4wm9pnEoq1daXKhHpsEiAHHjz8Hl4N5ZgT6HM/edit#gid=1517018599)
  - [Database schema](https://dbdiagram.io/d/61b0bee48c901501c0e6e6dc)
+ - [Suggestions for further development](https://github.com/TinyMLaas/TinyMLaaS/blob/main/docs/general/next_steps.md)
 
 ## Running the project
 
