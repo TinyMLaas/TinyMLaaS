@@ -1,0 +1,12 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - section: Bridge
+        contents:
+          - Bridge/installing.ipynb
+          - Bridge/observing.ipynb
+      - section: Tensorflow
+        contents:
+          - Tensorflow/compiling.ipynb
+          - Tensorflow/training.ipynb
