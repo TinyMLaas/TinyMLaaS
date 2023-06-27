@@ -14,7 +14,7 @@ Our FastAPI backend communicates with the docker image and containers using [Doc
 
 ## Database
 
-### Change database for more production ready database
+### Production ready database
 
 The backend uses [SQLite](https://www.sqlite.org/index.html). However, as SQlite is so lightweight, there are drawbacks, that affect the usage of the software. First of all, SQLite is not meant for storing big files. Because of this, all datasets, models and compiled models are stored **outside** the database in directories, and the database contains the **path** to the files. This is not ideal, as the backend can get messy with all the directories and if permanent storage is required outside the docker container, all of these volumes need to be mounted to the docker container.
 
