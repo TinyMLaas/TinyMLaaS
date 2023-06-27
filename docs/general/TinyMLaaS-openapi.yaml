@@ -68,104 +68,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-  /datasets/:
-    get:
-      tags:
-        - Data
-      summary: Get Datasets
-      description: Displays existing datasets
-      operationId: get_datasets_datasets__get
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                title: Response Get Datasets Datasets  Get
-                type: array
-                items:
-                  $ref: '#/components/schemas/Dataset'
-  /models/datasets/{dataset_id}:
-    post:
-      summary: Train Model
-      description: Train a model based on dataset_id
-      operationId: train_model_models_datasets__dataset_id__post
-      parameters:
-        - required: true
-          schema:
-            title: Dataset Id
-            type: integer
-          name: dataset_id
-          in: path
-        - required: true
-          schema:
-            $ref: '#/components/schemas/LossFunctions'
-          name: lossfunc
-          in: query
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ModelBase'
-        required: true
-      responses:
-        '201':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ModelTrained'
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /models/datasets/:
-    post:
-      summary: Train Model Dataset Id In Training Data
-      description: Train a model
-      operationId: train_model_dataset_id_in_training_data_models_datasets__post
-      parameters:
-        - required: true
-          schema:
-            $ref: '#/components/schemas/LossFunctions'
-          name: lossfunc
-          in: query
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ModelBase'
-        required: true
-      responses:
-        '201':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ModelTrained'
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /models/:
-    get:
-      summary: Get All Models
-      description: Return all models
-      operationId: get_all_models_models__get
-      responses:
-        '200':
-          description: Successful Response
-          content:
-            application/json:
-              schema:
-                title: Response Get All Models Models  Get
-                type: array
-                items:
-                  $ref: '#/components/schemas/Model'
   /bridges/:
     get:
       tags:
@@ -230,6 +132,58 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
+  /bridges/{bridge_id}/devices:
+    get:
+      tags:
+        - Bridges
+      summary: Get Bridge Devices
+      description: Get the devices connected to the bridge
+      operationId: get_bridge_devices_bridges__bridge_id__devices_get
+      parameters:
+        - required: true
+          schema:
+            title: Bridge Id
+          name: bridge_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BridgeDevices'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /bridges/{bridge_id}/health:
+    get:
+      tags:
+        - Bridges
+      summary: Check Bridge Status
+      description: Ping the bridge to find out weather or not it is online
+      operationId: check_bridge_status_bridges__bridge_id__health_get
+      parameters:
+        - required: true
+          schema:
+            title: Bridge Id
+          name: bridge_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BridgeStatus'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
   /compiled_models/models/{model_id}:
     post:
       tags:
@@ -273,22 +227,355 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CompiledModel'
+  /compiled_models/{compiled_model_id}:
+    get:
+      tags:
+        - Compiled models
+      summary: Get Compiled Model
+      description: |-
+        Get the compiled model.
+
+        This returns the compiled cc array file.
+      operationId: get_compiled_model_compiled_models__compiled_model_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Compiled Model Id
+          name: compiled_model_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /compiled_models/{compiled_model_id}/bridges/{bridge_id}/devices/{device_id}:
+    post:
+      tags:
+        - Compiled models
+      summary: Install Model To Device On Brdige
+      description: >-
+        Installs selected compiled model on a specified device connected to a
+        specified bridge
+      operationId: >-
+        install_model_to_device_on_brdige_compiled_models__compiled_model_id__bridges__bridge_id__devices__device_id__post
+      parameters:
+        - required: true
+          schema:
+            title: Compiled Model Id
+          name: compiled_model_id
+          in: path
+        - required: true
+          schema:
+            title: Bridge Id
+          name: bridge_id
+          in: path
+        - required: true
+          schema:
+            title: Device Id
+          name: device_id
+          in: path
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /datasets/:
+    get:
+      tags:
+        - Datasets
+      summary: Get Datasets
+      description: Displays existing datasets
+      operationId: get_datasets_datasets__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get Datasets Datasets  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/Dataset'
+    post:
+      tags:
+        - Datasets
+      summary: Add Dataset
+      description: Adds a new dataset to the backend
+      operationId: add_dataset_datasets__post
+      parameters:
+        - required: true
+          schema:
+            title: Dataset Name
+          name: dataset_name
+          in: query
+        - required: true
+          schema:
+            title: Dataset Desc
+          name: dataset_desc
+          in: query
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /datasets/{dataset_id}/:
+    post:
+      tags:
+        - Datasets
+      summary: Add Image To Dataset
+      description: Adds a new image to excisting dataset
+      operationId: add_image_to_dataset_datasets__dataset_id___post
+      parameters:
+        - required: true
+          schema:
+            title: Dataset Id
+          name: dataset_id
+          in: path
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: >-
+                #/components/schemas/Body_add_image_to_dataset_datasets__dataset_id___post
+        required: true
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /models/datasets/{dataset_id}:
+    post:
+      tags:
+        - Models
+      summary: Train Model
+      description: Train a model based on dataset_id
+      operationId: train_model_models_datasets__dataset_id__post
+      parameters:
+        - required: true
+          schema:
+            title: Dataset Id
+            type: integer
+          name: dataset_id
+          in: path
+        - required: true
+          schema:
+            $ref: '#/components/schemas/LossFunctions'
+          name: lossfunc
+          in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelBase'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelTrained'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /models/datasets/:
+    post:
+      tags:
+        - Models
+      summary: Train Model Dataset Id In Training Data
+      description: Train a model
+      operationId: train_model_dataset_id_in_training_data_models_datasets__post
+      parameters:
+        - required: true
+          schema:
+            $ref: '#/components/schemas/LossFunctions'
+          name: lossfunc
+          in: query
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModelBase'
+        required: true
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelTrained'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /models/:
+    get:
+      tags:
+        - Models
+      summary: Get All Models
+      description: Return all models
+      operationId: get_all_models_models__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Get All Models Models  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/Model'
+  /models/{model_id}/datasets/{dataset_id}:
+    put:
+      tags:
+        - Models
+      summary: Continue Training Model
+      description: Further Trains a model
+      operationId: continue_training_model_models__model_id__datasets__dataset_id__put
+      parameters:
+        - required: true
+          schema:
+            title: Model Id
+            type: integer
+          name: model_id
+          in: path
+        - required: true
+          schema:
+            title: Dataset Id
+            type: integer
+          name: dataset_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelTrained'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /installers/:
+    get:
+      tags:
+        - Installers
+      summary: List Registered Installers
+      description: Displays registered devices
+      operationId: list_registered_installers_installers__get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response List Registered Installers Installers  Get
+                type: array
+                items:
+                  $ref: '#/components/schemas/Installer'
+  /observations/bridges/{bridge_id}/devices/{device_id}:
+    get:
+      tags:
+        - Observing
+      summary: Observe Device On Bridge
+      description: >-
+        Requests a single observation from a specified device on a specified
+        bridge.
+      operationId: >-
+        observe_device_on_bridge_observations_bridges__bridge_id__devices__device_id__get
+      parameters:
+        - required: true
+          schema:
+            title: Bridge Id
+            type: integer
+          name: bridge_id
+          in: path
+        - required: true
+          schema:
+            title: Device Id
+            type: integer
+          name: device_id
+          in: path
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Observation'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    Body_add_image_to_dataset_datasets__dataset_id___post:
+      title: Body_add_image_to_dataset_datasets__dataset_id___post
+      required:
+        - files
+      type: object
+      properties:
+        files:
+          title: Files
+          type: array
+          items:
+            type: string
+            format: binary
     Bridge:
       title: Bridge
       required:
-        - ip_address
+        - address
+        - https
         - id
       type: object
       properties:
-        ip_address:
-          title: Ip Address
+        address:
+          title: Address
           type: string
-          format: ipv4
         name:
           title: Name
           type: string
+        https:
+          title: Https
+          type: boolean
         id:
           title: Id
           type: integer
@@ -298,19 +585,59 @@ components:
     BridgeCreate:
       title: BridgeCreate
       required:
-        - ip_address
+        - address
+        - https
       type: object
       properties:
-        ip_address:
-          title: Ip Address
+        address:
+          title: Address
           type: string
-          format: ipv4
         name:
           title: Name
           type: string
+        https:
+          title: Https
+          type: boolean
       description: |-
         When creating a new Bridge, there is yet no id.
             
+    BridgeDevice:
+      title: BridgeDevice
+      required:
+        - manufacturer
+        - product
+        - serial
+      type: object
+      properties:
+        manufacturer:
+          title: Manufacturer
+          type: string
+        product:
+          title: Product
+          type: string
+        serial:
+          title: Serial
+          type: string
+    BridgeDevices:
+      title: BridgeDevices
+      required:
+        - devices
+      type: object
+      properties:
+        devices:
+          title: Devices
+          type: array
+          items:
+            $ref: '#/components/schemas/BridgeDevice'
+    BridgeStatus:
+      title: BridgeStatus
+      required:
+        - online
+      type: object
+      properties:
+        online:
+          title: Online
+          type: boolean
     CompiledModel:
       title: CompiledModel
       required:
@@ -323,9 +650,6 @@ components:
           title: Created
           type: string
           format: date-time
-        compiler_id:
-          title: Compiler Id
-          type: integer
         model_id:
           title: Model Id
           type: integer
@@ -374,6 +698,7 @@ components:
       title: Device
       required:
         - name
+        - installer_id
         - model
         - description
         - serial
@@ -388,14 +713,9 @@ components:
           title: Connection
           minLength: 1
           type: string
-        installer:
-          title: Installer
-          minLength: 1
-          type: string
-        compiler:
-          title: Compiler
-          minLength: 1
-          type: string
+        installer_id:
+          title: Installer Id
+          type: integer
         model:
           title: Model
           minLength: 1
@@ -411,6 +731,10 @@ components:
         id:
           title: Id
           type: integer
+        installer:
+          $ref: '#/components/schemas/Installer'
+        bridge:
+          $ref: '#/components/schemas/Bridge'
       description: |-
         If Device is in database, it always has an id.
             
@@ -418,6 +742,7 @@ components:
       title: DeviceCreate
       required:
         - name
+        - installer_id
         - model
         - description
         - serial
@@ -431,14 +756,9 @@ components:
           title: Connection
           minLength: 1
           type: string
-        installer:
-          title: Installer
-          minLength: 1
-          type: string
-        compiler:
-          title: Compiler
-          minLength: 1
-          type: string
+        installer_id:
+          title: Installer Id
+          type: integer
         model:
           title: Model
           minLength: 1
@@ -463,6 +783,23 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ValidationError'
+    Installer:
+      title: Installer
+      required:
+        - name
+        - id
+      type: object
+      properties:
+        name:
+          title: Name
+          minLength: 1
+          type: string
+        id:
+          title: Id
+          type: integer
+      description: |-
+        If Installer is in database, it always has an id.
+            
     LossFunctions:
       title: LossFunctions
       enum:
@@ -519,8 +856,9 @@ components:
         description:
           title: Description
           type: string
-      description: |-
-        Base for Model trained on Tensorflow. Lacks id as it is assigned by database
+      description: >-
+        Base for Model trained on Tensorflow. Lacks id as it is assigned by
+        database
             
     ModelTrained:
       title: ModelTrained
@@ -564,7 +902,27 @@ components:
           type: string
           format: binary
       description: |-
-        If Model is in database, it always has an id.
+        A trained model includes prediction image, the prediction that 
+        the model has made of the image and some statistics in a plot.
+    Observation:
+      title: Observation
+      required:
+        - bridge_id
+        - device_id
+        - observation_value
+      type: object
+      properties:
+        bridge_id:
+          title: Bridge Id
+          type: integer
+        device_id:
+          title: Device Id
+          type: integer
+        observation_value:
+          title: Observation Value
+          type: object
+      description: |-
+        Class for getting and returning values for observation
             
     ValidationError:
       title: ValidationError
@@ -590,9 +948,11 @@ components:
 tags:
   - name: Devices
     description: HTTP request methods for **devices**.
-  - name: Data
+  - name: Datasets
     description: HTTP request methods for **data**.
   - name: Bridges
     description: HTTP request methods for **bridges**.
+  - name: Models
+    description: HTTP request methods for **machine learning models**
   - name: Compiled models
-    description: HTTP request methods for **compiled models**.
+    description: HTTP request methods for **compiled models**
