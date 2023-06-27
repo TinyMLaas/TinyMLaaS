@@ -19,7 +19,7 @@ modules: training, compiling, installing and observing.
 
 - [Backend](https://github.com/TinyMLaas/TinyML-backend)
 - [Frontend](https://github.com/TinyMLaas/TinyML-frontend)
-- [CLI](www.to.do)
+- [CLI](https://github.com/TinyMLaas/TinyML-CLI)
 - [MCU components](https://github.com/TinyMLaas/TinyML-MCU)
 
 ## Documentation
@@ -52,4 +52,4 @@ the birdge / relay service for MCUs.
 - [Backend](https://github.com/TinyMLaas/TinyML-backend#instructions-for-running-the-application)
 - [Frontend](https://github.com/TinyMLaas/TinyML-frontend)
 - [MCUs](https://github.com/TinyMLaas/TinyML-MCU)
-- [CLI](www.to.do)
+- [CLI](https://github.com/TinyMLaas/TinyML-CLI)
