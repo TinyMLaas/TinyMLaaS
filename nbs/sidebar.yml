@@ -2,6 +2,8 @@ website:
   sidebar:
     contents:
       - index.ipynb
+      - 00_core.ipynb
+      - 01_export.ipynb
       - section: Bridge
         contents:
           - Bridge/installing.ipynb
