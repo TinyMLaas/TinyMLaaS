@@ -1,0 +1,46 @@
+version: '3.3'
+
+services:
+  
+  backend:
+    container_name: tinymlaasbackend
+    build:
+      context: .
+      dockerfile: backend.Dockerfile
+    command: uvicorn main:app --host 0.0.0.0
+    ports: 
+      - 8000:8000
+    environment:
+      - DATABASE_URL=sqlite:///./tiny_mlaas.db 
+  
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend.Dockerfile
+    ports:
+      - 0.0.0.0:8501:8501
+    environment:
+      - BACKEND_URL=http://tinymlaasbackend:8000
+      - ROBOT_TESTS=${ROBOT}
+    privileged: true
+    volumes:
+     - /dev/bus/usb:/dev/bus/usb
+
+  bridge:
+    build:
+      context: .
+    # If you have devices connected to the relay, add them here
+    # devices:
+     # - "/dev/ttyACM0:/dev/ttyACM0"
+    volumes:
+      - "/dev/bus/usb:/dev/bus/usb"
+      - "/dev/serial:/dev/serial"
+    # If the runtime is not available, use privileged mode
+    runtime: sysbox-runc
+    # privileged: true
+    ports:
+      - 5000:8080
+
+networks:
+  default:
+    name: tinyml_network

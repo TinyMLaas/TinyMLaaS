@@ -1,50 +1,35 @@
 # Architecture Guide
+This page contains general information about the architechture and how each component is related to each other.
 
-This page contains general information about the applications architecture and how different parts of the application work and communicate with each other.
+## overview
+
+TinyMLaaS consist of several components:
+ - backend
+ - streamlit frontend
+ - cli
+ - MCU components
+
+The different components are stored in their own repositories which can be found [here](https://github.com/orgs/TinyMLaas/repositories).
+
+The backend is the core component which contains all the API endpoints. By calling them you can execute all the tasks necessary for the workflow. The backend is responsible with communicating with the machine learing components, storing data in the database and installing & managing MCU devices.
+
+Tensorflow machine learning components live in the main repository and need to be fetched for the backend seperately.
+
+MCU repository contains the bridge for communicating with the devices and the code needed for devices.
+
+We have implemented two different interfaces for the TinyMLaaS: CLI and website GUI using streamlit. Since you can make API calls directly to backend it's extremely simple to build your own frontends in the future.
+
+ 
+## Block Diagram
+
+![Block Diagram](images/block_diagram.png)
+
+The backend is the main component that deals with calling the tensorflow functions and communicating with the MCU devices. Tensorflow is currently the supported UI but you can also make API calls directly or use the CLI. In the future the tensorflow components can be containarized as their own service.
 
 ## Key Components
-- ML model training 
-- Data storage & loading
-- ML model quantization and optimization
-- ML model compilation
-- Firmware packaging
-
-## Enabling Technologies
-- Tensorflow;
-- Docker
-- Streamlit
-- Aws S3
-
-## What Has Been Implemented?
-
-![General flow of the service](images/asd.png)
-
-- Right now uploading the firmware is supported via uploading the firmware to Dockerhub and notifying the Bridging server to pull the docker image and upload the firmware via Serial on to the device.
-- TODO regarding the above picture containing all the elements of the application is the ability to update Over-The-Air for Wifi-enabled devices.
-
-### Implemented Features
 - ML model training
-- Data storage to LocalStack/S3
-- ML model optimization and compression
-- Supported devices Arduino Nano 33 BLE Sense and RPI pico
-- Querying prediction results from the end-device
-- Refer to the actual application and the above picture for more information.
+- Data Storage and loading (database)
+- ML model quantization and optimization
+- ML model compilation for MCUs
 
-## Neural Network Architecture
-
-![Current NN Architecture](images/model.tflite.png)
-
-When training a Neural Network for TinyML, there are a few things to keep in mind to ease the process. The resulting model must fit into the device.
-
-Things that affect the resulting models size include:
-- Amount of layers used in the model. Fewer layers usually results in smaller sized models.
-- Used OPs, e.g., Convolution layers can take up quite a bit of space.
-- Quantization is almost necessary for the model to compressed into a usable size.
-
-TinyML related tips
-- OPs used in the keras model training must also be supported in tflite-micro.
-- [Netron](netron.app), Use netron to visualize models and check that you have all the OPs enabled in your Firmware. Every OP must be declared in order for the model to work.
-
-Misc.
-- [Tensorflow](https://www.tensorflow.org/tutorials/images/classification) has extensive amount of information and tutorials regarding almost all necessary things when it comes to the application's ML related stuff.
 
