@@ -27,3 +27,17 @@ Because of these drawbacks, we would suggest changing the used database from SQL
 As mentioned in the previous [section](#Change database for more production ready database), all datasets and models are stored outside the database. With the change of the database, it would be better to save all these files in the database.
 
 
+## Datasets
+
+### Downloading/uploading datasets (as zip)
+Currently, you can only upload and append to datasets. It's not possible to view or download it anyway. The application should have way to download the entire dataset to your machine (propably as zip so it works on both Windows and Linux).
+
+At the moment you can only send bulk of pictures of to the app to create a dataset. It's propably good idea to allow sending zips and creating datasets from them. You propably need to make sure that 
+- it's a valid dataset with working images
+- the saved dataset keeps same folder structure as the send zip
+- the user doesn't send malicious data
+
+### Editing, deleting and managing datasets
+
+Currently, only adding and appending datasets is supported. The user should propably be able to manage the datasets better. First you should be able to remove unwanted datasets. Second, the user should be able to make folder structure for the datasets and edit them for labeling purposes [see this tutorial for example how the data is structured](https://www.tensorflow.org/tutorials/images/classification#download_and_explore_the_dataset).
+Being able to simply download the datasets,editing it locally, removing it from the app and readding it allows for the user to edit it. After that, if you want to enhance the user experience one idea is to add better editing options to the app itself: Being able remove photos, being able to add photos, creating new folders, removing folders.
