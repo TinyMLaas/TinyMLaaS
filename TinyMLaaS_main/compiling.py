@@ -11,7 +11,7 @@ import pandas as pd
 import binascii
 
 
-# %% ../nbs/Tensorflow/compiling.ipynb 2
+# %% ../nbs/Tensorflow/compiling.ipynb 3
 def convert_model(model_path: str, output_path: str, dataset_path: str, model_params: dict, model_name: str):
     """Model conversion into TFLite model
     Args:

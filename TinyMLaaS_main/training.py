@@ -18,7 +18,7 @@ from tensorflow import keras
 from tensorflow.keras import layers
 from tensorflow.keras.models import Sequential, load_model
 
-# %% ../nbs/Tensorflow/training.ipynb 2
+# %% ../nbs/Tensorflow/training.ipynb 3
 class TrainModel:
 
     def __init__(self, data_dir):
@@ -53,7 +53,7 @@ class TrainModel:
 
 
     def train(self, img_height, img_width, epochs, optim_choice, batch_size, model_path):
-        """Model training
+        """Trains a new neural network model.
         
         Args:
             `img_height` (_int_): image pixel height
@@ -115,7 +115,7 @@ class TrainModel:
 
 
     def continue_training(self, img_height, img_width, epochs, batch_size, model_path):
-        """Model training
+        """Takes an excisting model and further trains it with more images.
         
         Args:
             `img_height` (_int_): image pixel height
@@ -189,7 +189,7 @@ class TrainModel:
         return b, result
 
     def plot_statistics(self, history, epochs_range):
-        """Plot model training statistics
+        """Plot model training statistics.
 
         Args:
             `history` (tuple?): tuple containing loss and accuracy values over training

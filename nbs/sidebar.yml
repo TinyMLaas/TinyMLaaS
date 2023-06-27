@@ -10,3 +10,6 @@ website:
         contents:
           - Tensorflow/compiling.ipynb
           - Tensorflow/training.ipynb
+      - section: docs
+        contents:
+          - docs/Software-Project-Summer-Kick-off.ipynb
