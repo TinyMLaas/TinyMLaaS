@@ -34,6 +34,18 @@ When deploying the API to production, the api will most likely be behind a proxy
 
 ### SQLAlchemy
 
+The backend talks with the database with sqlalchemy. This means that it is able to talk with any SQL-database without any changes to the backends software.
+
 As of now, the database in use is *sqlite*. However, this is meant to be more of a temporary solution to make development easier. For more information, checkout the suggestions in [Suggestions for further development](next_steps.md)
 
 ## Bridge
+
+The relay is the part of the software to which the microcontrollers are connected to. It is also done in API style.
+
+### Flask
+
+Unlike the backend, the bridge is created with [Flask](https://flask.palletsprojects.com/en/2.3.x/). Flask is lightweight and easy to understand, which makes sence for the bridge, as the hardware, on which the bridge runs, might not be that powerfull.
+
+### Usbutils
+
+To find USB-devices, the software does not use pythons libraries, such as [PyUSB](https://github.com/pyusb/pyusb). This is because these softwares also have OS dependencies, that need to be installed and do not work that well in docker containers. *USButils* works great in contianers and is easy to install, which is why it has been chosen over pythons own libraries.
