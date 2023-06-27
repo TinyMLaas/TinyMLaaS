@@ -12,4 +12,18 @@ The ```dockerize_tensorflow``` branch contains a [Dockerfile](https://github.com
 
 Our FastAPI backend communicates with the docker image and containers using [Docker API](https://docs.docker.com/engine/api/) and more specifically the [Docker SDK for Python](https://docker-py.readthedocs.io/en/stable/index.html). The feature is implemented in the [tf_docker/compile.py](https://github.com/TinyMLaas/TinyML-backend/blob/dockerize_tensorflow/tf_docker/compile.py) backend module.
 
+## Database
+
+### Change database for more production ready database
+
+The backend uses [SQLite](https://www.sqlite.org/index.html). However, as SQlite is so lightweight, there are drawbacks, that affect the usage of the software. First of all, SQLite is not meant for storing big files. Because of this, all datasets, models and compiled models are stored **outside** the database in directories, and the database contains the **path** to the files. This is not ideal, as the backend can get messy with all the directories and if permanent storage is required outside the docker container, all of these volumes need to be mounted to the docker container.
+
+A SQLite database is also a single file, meaning that accidentally deleting the database or misplacing it is more common.
+
+Because of these drawbacks, we would suggest changing the used database from SQLite to something more robust and production ready, such as [MariaDB](https://mariadb.org/) or [PostgreSQL](https://www.postgresql.org/). Larger files can be stored in these databases and it is easy to mount one database rather than multiple different locations for all different saving locations.
+
+### Move saving of models and datasets to database
+
+As mentioned in the previous [section](#Change database for more production ready database), all datasets and models are stored outside the database. With the change of the database, it would be better to save all these files in the database.
+
 
