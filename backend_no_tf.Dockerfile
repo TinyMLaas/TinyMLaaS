@@ -13,8 +13,7 @@ WORKDIR /TinyML-backend
 #     git checkout main/dockerize_tensorflow -- TinyMLaaS_main
 
 RUN touch tiny_mlaas.db && sqlite3 tiny_mlaas.db '.read schema.sql' '.read populate.sql' && \
-    pip install --default-timeout=1000 --upgrade --ignore-installed packaging -r requirements.txt && \
-    chmod u+x start_docker_daemon.sh
+    pip install --default-timeout=1000 --upgrade --ignore-installed packaging -r requirements.txt
 
-CMD ./start_docker_daemon.sh ; uvicorn main:app --host 0.0.0.0
+CMD dockerd > /var/log/dockerd.log 2>&1 & uvicorn main:app --host 0.0.0.0
 
