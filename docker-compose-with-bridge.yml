@@ -29,6 +29,7 @@ services:
   bridge:
     build:
       context: .
+      dockerfile: bridge.Dockerfile
     # If you have devices connected to the relay, add them here
     # devices:
      # - "/dev/ttyACM0:/dev/ttyACM0"
