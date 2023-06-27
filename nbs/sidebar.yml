@@ -2,7 +2,16 @@ website:
   sidebar:
     contents:
       - index.ipynb
-      - compiling.ipynb
-      - core.ipynb
-      - export.ipynb
-      - training.ipynb
+      - 00_core.ipynb
+      - 01_export.ipynb
+      - section: Bridge
+        contents:
+          - Bridge/installing.ipynb
+          - Bridge/observing.ipynb
+      - section: Tensorflow
+        contents:
+          - Tensorflow/compiling.ipynb
+          - Tensorflow/training.ipynb
+      - section: docs
+        contents:
+          - docs/Software-Project-Summer-Kick-off.ipynb

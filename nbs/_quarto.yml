@@ -3,13 +3,15 @@ project:
 
 format:
   html:
-    theme: cosmo
+    theme: lux
     css: styles.css
     toc: true
 
 website:
+  title: "TinyMLaaS"
   twitter-card: true
   open-graph: true
+  repo-url: "https://github.com/TinyMLaas"
   repo-actions: [issue]
   navbar:
     background: primary
