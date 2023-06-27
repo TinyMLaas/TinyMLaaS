@@ -1,0 +1,8 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - compiling.ipynb
+      - core.ipynb
+      - export.ipynb
+      - training.ipynb
