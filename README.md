@@ -39,10 +39,26 @@ modules: training, compiling, installing and observing.
 Use Docker to build and run the whole project.
 
 1.  Clone this repository
-2.  Run `docker compose up -f docker-compose.yml`
+2.  Run
+
+``` bash
+docker compose up -d
+```
 
 This will set up both the backend and frontend, and a network between
 the two
+
+If the bridge is also needed on the same machine, use the
+[docker-compose-with-bridge.yml](./docker-compose-with-bridge.yml) file.
+This will build and run the frontend, backend and bridge and create a
+network between all three components.
+
+1.  Clone this repository
+2.  Run
+
+``` bash
+docker compose up -f docker-compose-with-brdige.yml -d
+```
 
 ### Running individual parts of the project
 
