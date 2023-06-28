@@ -6,10 +6,16 @@ website:
         contents:
           - Bridge/installing.ipynb
           - Bridge/observing.ipynb
+      - section: Documentation
+        contents:
+          - Documentation/Architecture.ipynb
+          - Documentation/Background.ipynb
+          - Documentation/Demonstration.ipynb
+          - Documentation/Next_steps.ipynb
+          - Documentation/Software-Project-Summer-Kick-off.ipynb
+          - Documentation/Technologies.ipynb
+          - Documentation/Use_cases.ipynb
       - section: Tensorflow
         contents:
           - Tensorflow/compiling.ipynb
           - Tensorflow/training.ipynb
-      - section: docs
-        contents:
-          - docs/Software-Project-Summer-Kick-off.ipynb
