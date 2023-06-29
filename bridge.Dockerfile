@@ -8,6 +8,8 @@ RUN apk update && apk add --no-cache docker git usbutils python3 py3-pip && \
 
 WORKDIR /TinyML-MCU
     
-RUN pip install --upgrade --ignore-installed packaging -r requirements.txt
+RUN pip install --upgrade --ignore-installed packaging -r requirements.txt && \
+    echo "dockerd > /var/log/dockerd.log 2>&1 &" > start_docker_daemon.sh && \
+    chmod u+x start_docker_daemon.sh
 
-CMD dockerd > /var/log/dockerd.log 2>&1 & waitress-serve main:app
+CMD ./start_docker_daemon.sh ; waitress-serve main:app

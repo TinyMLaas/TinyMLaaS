@@ -7,7 +7,7 @@ services:
     build:
       context: .
       dockerfile: backend.Dockerfile
-    command: .venv/bin/python -m uvicorn main:app --host 0.0.0.0
+    command: .venv/bin/python -m uvicorn main:app --host 0.0.0.0 --reload
     ports: 
       - 8000:8000
     environment:
@@ -31,8 +31,8 @@ services:
       context: .
       dockerfile: bridge.Dockerfile
     # If you have devices connected to the relay, add them here
-    # devices:
-     # - "/dev/ttyACM0:/dev/ttyACM0"
+    devices:
+     - "/dev/ttyACM0:/dev/ttyACM0"
     volumes:
       - "/dev/bus/usb:/dev/bus/usb"
       - "/dev/serial:/dev/serial"
