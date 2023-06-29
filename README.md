@@ -58,6 +58,8 @@ network between all three components.
 docker compose up -f docker-compose-with-brdige.yml -d
 ```
 
+Note that requires the [Sysbox runtime](https://github.com/nestybox/sysbox) to be installed and running, as the bridge uses this module.
+
 ### Running individual parts of the project
 
 See instructions in respective repositories for frontend, backend and
