@@ -4,7 +4,7 @@ EXPOSE 8000
 
 WORKDIR /TinyML-backend
 
-RUN apt-get update && apt-get install -y git ffmpeg python3 python3-pip python3-venv sqlite3 &&  \
+RUN apt-get update && apt-get install -y git ffmpeg python3 python3-venv sqlite3 &&  \
     git clone https://github.com/TinyMLaas/TinyML-backend.git . && \
     touch tiny_mlaas.db && sqlite3 tiny_mlaas.db '.read schema.sql' '.read populate.sql' && \
     git remote add main https://github.com/TinyMLaas/TinyMLaaS.git && \
