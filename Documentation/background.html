@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>TinyMLaaS-main - Background information and some literature sources</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="TinyMLaaS-main - Background information and some literature sources">
+<meta property="og:description" content="">
+<meta property="og:site-name" content="TinyMLaaS-main">
+<meta name="twitter:title" content="TinyMLaaS-main - Background information and some literature sources">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">TinyMLaaS-main</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools ms-auto">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Documentation/architecture.html">Documentation</a></li><li class="breadcrumb-item"><a href="../Documentation/background.html">Background information and some literature sources</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TinyMLaaS-main</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Bridge</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Bridge/installing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">installing.html</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Bridge/observing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">observing.html</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Documentation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Architecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/background.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Background information and some literature sources</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/demonstration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demonstratation of TinyMLaaS WebApp</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/next_steps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Suggestions for further development</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/software-project-summer-kick-off.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project starting point</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/technologies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Technological choices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/use_cases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Use case scenarios</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Tensorflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Tensorflow/compiling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">compiling.html</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Tensorflow/training.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">training.html</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#federated-learning-in-tinyml" id="toc-federated-learning-in-tinyml" class="nav-link active" data-scroll-target="#federated-learning-in-tinyml">Federated learning in TinyML</a></li>
+  <li><a href="#edge-impulse" id="toc-edge-impulse" class="nav-link" data-scroll-target="#edge-impulse">Edge Impulse</a></li>
+  <li><a href="#arduino-and-wiring" id="toc-arduino-and-wiring" class="nav-link" data-scroll-target="#arduino-and-wiring">Arduino and Wiring</a></li>
+  <li><a href="#mbed" id="toc-mbed" class="nav-link" data-scroll-target="#mbed">Mbed</a></li>
+  <li><a href="#ifttt" id="toc-ifttt" class="nav-link" data-scroll-target="#ifttt">IFTTT</a></li>
+  <li><a href="#sony-mesh" id="toc-sony-mesh" class="nav-link" data-scroll-target="#sony-mesh">Sony MESH</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources:</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/JeHugawa/TinyMLaaS-main/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Background information and some literature sources</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="federated-learning-in-tinyml" class="level2">
+<h2 class="anchored" data-anchor-id="federated-learning-in-tinyml">Federated learning in TinyML</h2>
+<p>TinyML combines ML, mathematical optimization and tiny IoT embedded systems. TinyML is an effective method to analyze real-world data continuously, without the resource overhead of traditional ML hardware. <a href="https://ieeexplore.ieee.org/abstract/document/9767250">TinyFedTL</a> is the first open-sources implementation of federated learning (FL) in IoT containing microcontroller unit (MCU) and small CPU based devices. TinyFedTL uses transfer learning (TL) to demonstrate effective privacy-centric FL on devices with a small memory footprint (less than 1 MB). Researchers and engineers may open up data in various fields to gain insights for improving life quality or user experience without sacrificing privacy.</p>
+<p>While recent progress in ML frameworks has made it possible to perform inference with models using cheap, tiny devices, the training of the models is typically done separately on powerful computers. This provides the training process abundant CPU and memory resources to process large stored datasets. However, it is possible to train the machine learning model directly on the microcontroller and extend the training process with federated learning. <a href="https://www.mdpi.com/2079-9292/11/4/573">On-device training</a> has been illustrated with keyword spotting task. Experiments were conducted with real devices to characterize the learning behaviour and resource consumption for various hyperparameters and federated learning configurations. The observation was, that when training locally with fewer data, more frequent federated learning rounds reduced the training loss faster, but with the cost of higher bandwidth usage and longer training time. The results indicated that depending of the application, the trade-off between the requirements and the resource usage of the system needs to be determined.</p>
+</section>
+<section id="edge-impulse" class="level2">
+<h2 class="anchored" data-anchor-id="edge-impulse">Edge Impulse</h2>
+<p><a href="https://www.edgeimpulse.com/">Edge Impulse</a> is the leading development platform for ML on edge devices. It is free for developers. With Edge Impulse one can: - build advanced embedded ML apps - build custom datasets rapidly - collect sensor, audio or camera data from devices, files or cloud integrations - use automatic labeling tools such as object detection and audio segmentation - use Edge Impulse cloud infrastructure to set up and run reusable scripted operations that transform the input data on large sets of data in parallel - integrate deployment pipelines, CI/CD tools and custom data sources with open APIs - develop models and algortihms - with prebuilt DSP <a href="https://www.analog.com/en/design-center/landing-pages/001/beginners-guide-to-dsp.html">(Digital Signal Processors)</a> and ML blocks - hardware decisions can be made on device performance and Flash/RAM on every step - DSP feature extraction algorithms can be customized - custom machine learning models with <a href="https://keras.io/">Keras APIs</a> - use visualized insights on datasets, model performance and memory to fine-tune the production model - optimize models and algorithms - <a href="https://www.edgeimpulse.com/blog/introducing-the-eon-tuner-edge-impulses-new-automl-tool-for-embedded-machine-learning">EON TUNER</a> for finding balance between DSP configurations and model architecture, budgeted against memory and latency constraints - <a href="https://www.edgeimpulse.com/blog/introducing-eon">EON Compiler</a> for lighter and faster neural networks with equal accuracy - have full visibility across the whole ML pipeline - complete access to data attributes, DSP algorithms, model hyperparameters throughout whole development lifecycle - test model performance accurately - virtual cloud hardware simulation framework to get performance and accuracy metrics before deploying on any physical device - model performance can be evaluated with live classification - devices, automated ML pipeline testing, integration with the testing framework - deploy easily on any edge target - optimize source code by generating optimized embedded libraries and applications for any edge device - build ready-to-go binaries with selected development boards supported by Edge Impulse with special firmware - without OS or hardware dependencies and compile to nearly anything - make digital twin by re-deploying cloud-hosted ML projects to any hardware target on the fly - benefit from access and integrations to the leading hardware partner ecosystem from MCUs to MPUs and GPUs including acceleration - Arduino - Himax - OpenMV - Nvidia - Nordic semiconductor - Raspberry Pi - Silicon Labs - Sony - ST - Syntiant - Texas Instruments</p>
+</section>
+<section id="arduino-and-wiring" class="level2">
+<h2 class="anchored" data-anchor-id="arduino-and-wiring">Arduino and Wiring</h2>
+<p><a href="https://www.arduino.cc/">Arduino</a> is an open-source electronics platform intended for anyone to make interactive projects. It is based on easy-to-use hardware and software. <a href="https://www.arduino.cc/en/Guide/Introduction">Arduino boards can</a> - read inputs: light on a sensor, finger on a button, twitter message - turn inputs into outputs: activate motor, turn on a LED, publish something online - be instructed what to do by sending a set of instructions to the microcontroller on the board - using Arduino programming language (based on <a href="https://en.wikipedia.org/wiki/Wiring_%28development_platform%29">Wiring</a>) and the Arduino Software (IDE) (based on <a href="https://www.arduino.cc/education/visualization-with-arduino-and-processing">Processing</a>, an open source integrated development environment (IDE) like the Arduino IDE)</p>
+<p>Because of simple and accessible user experience Arduino has been used in thousands of projects and applications by a worldwide community of makers, students, hobbyists, artists, programmers and professionals to produce a vast amount of accessible knowledge. The product range includes products for IoT applications, wearable, 3D printing and embedded environments.</p>
+<p>The Arduino software - is easy-to-use for beginners but flexible enough for advanced users - runs on Mac, Windows and Linux - is used by teachers and students to build low cost scientific instruments to prove chemistry and physics principles and to get started with programming and robotics - is used by designers and architects to build interactive prototypes - is used by musicians and artists to build installations ansd to experiment with new musical instruments - is used by makers to build projects - can be used by anyone by following detailed instructions of a kit or sharing ideas online</p>
+<p>Arduino offers some pros over other microcontrollers and microcontroller platforms available: - inexpensive compared to other microcontrolle platforms; the least expensive version of the Arduino module can be assembled by hand, pre-assembled Arduino modules are also affordable - cross-platform, the Arduino software (IDE) runs on Windows, Macintosh OSX, Linux (most microcontroller systems are limited to Windows) - simple, clear programming environment - easy-to-use for beginners but flexible enough for advanced users - because it’s based on Processing programming environment, students learning to program in that environment will be familiar with how the Arduino IDE works - open source and extensible software, published as open source tools - the language is based on AVR-C programming and can be expanded through C++ libraries - AVR-C code can be added directly into the Arduino programs - open source and extensible hardware, with the plans of the Arduino boards published under a Creative Commons licence, so own versions of the module with extensions and improvements can be built by anyone</p>
+<p>Code can be developed in the <a href="https://cloud.arduino.cc/">Arduino Cloud</a> to build smart IoT projects. - smart devices can be connected within minutes - wide range of compatible devices, the Arduino Cloud provides the necessary code - nice dashbords can be created with mix and match customizable widgets to visualize real time or historical data or to control the device - projects can be controlled from anywhere in the world from any device, for example Alexa. - projects and libraries are always synced and up to date - all projects are cloud based and accessible from any device - data is always ecrypted and always belongs to the user (you) - is open and customizable, has flexible APIs to integrate and customize Cloud - all connected Arduino boards have a built-in crypto chip that makes them incredibly secure - sketches and project data are stored in AES 256-bit encrypted datastores - account security is protected with single use authentication codes - open and transparent data privacy terms and your data always belongs to you - has a wide range of resources - <a href="https://docs.arduino.cc/cloud/iot-cloud">tutorials</a> - <a href="https://docs.arduino.cc/arduino-cloud/getting-started/api-overview">APIs</a> - <a href="https://docs.arduino.cc/cloud/iot-cloud/tutorials/technical-reference">documentation</a></p>
+<p>Arduino’s <a href="https://en.wikipedia.org/wiki/Arduino#History">history</a> is interesting. The Arduino project was based on the developing platform Wiring created by Hernando Barragán as a Master’s thesis project at the Interaction Design Institute Ivrea (IDII) in Ivrea, Italy in 2003.</p>
+<p>Hernando has been developing Wiring ever since and now Wiring is an open source electronics prototyping platform composed of programming language, an integrated development environment (IDE) , and a single-board microcontroller. More about Wiring can be found <a href="http://wiring.org.co/">here</a>.</p>
+<p>Wiring offers new boards to customers in their <a href="https://eu.robotshop.com/">webshop</a>, but Wiring supports other boards directly, so Wiring IDE can be used on other boards as well (and more will be added). Thus Arduino board can be used with the Wiring IDE. Wiring can be <a href="http://wiring.org.co/download/">downloaded</a> for Linux, MacOS X and Windows.</p>
+</section>
+<section id="mbed" class="level2">
+<h2 class="anchored" data-anchor-id="mbed">Mbed</h2>
+<p><a href="https://en.wikipedia.org/wiki/Mbed">Mbed</a> is an open-source platform and operating system for internet-connected devices that are based on 32-bit <a href="https://www.arm.com/products/silicon-ip-cpu?families=cortex-m&amp;showall=true">ARM Cortex-M microcontrollers</a>. These devices are known as IoT devices. Mbed is collaboratively developed by <a href="https://en.wikipedia.org/wiki/Arm_(company)">Arm</a> and its tech partners.</p>
+<p>Mbed is free and open source IoT operating system with connectivity, security, storage, device management and ML. Mbed offers free development tools, thousands of code examples and support for hundreds of microcontrollers development boards, as described <a href="https://os.mbed.com/">here</a>. - Mbed has its own Mbed OS with - well-defined API to develop C++ applications - free tools and thousands of code examples, libraries and drivers for common components - built-in security stack - core components such as storage and connectivity options - Mbed Enabled hardware has many options - Compiler and IDE - Keil Studio Cloud - modern, zero-installation Mbed development environment in the browser - code high-lighting, WebUSB flash and debug and version control - Mbed Studio - an IDE for application and library development - single environment with everything to create, compile and debug Mbed programs - Mbed CLI - command line interface allows to integrate Mbed functionality into preferred editor or enhance automation setup - Security - Arm Mbed TLS provides comprehensive SSL/TLS solution - easy to include cryptographic and SSL/TLS capabilities in the software and embedded products - as an SSL library Arm Mbed TLS provides an intuitive API, readable source code and a minimal and highly configurable code footprint</p>
+</section>
+<section id="ifttt" class="level2">
+<h2 class="anchored" data-anchor-id="ifttt">IFTTT</h2>
+<p><a href="https://ifttt.com/">IFTTT</a> is a private company that runs online digital automation platforms and offers them as a service. IFTTT is short for If This Then That. IFTTT integrates apps, devices and services quick and easy. IFTTT makes tech <a href="https://ifttt.com/explore/new_to_ifttt">incompatibility easy to tackle</a>. Automating process is simple, the user chooses - trigger - action(s) - name for the applet and finish</p>
+<p>IFTTT has over 700 services ready (more added weekly) to be automated. Price range of the services is from 0€/forever to 5€/month. IFTTT provides a simple way to create for example a smart home: - make a user account and log in (can be done with Google or Facebook) - trigger: give Google Assistant a voice command “Hey Google, I need coffee” - action(s): coffee machine is turned on and when the coffee is ready, the coffee machine turns off - name the applet: “make coffee” and finish the applet</p>
+</section>
+<section id="sony-mesh" class="level2">
+<h2 class="anchored" data-anchor-id="sony-mesh">Sony MESH</h2>
+<p><a href="https://meshprj.com/en/">Sony MESH</a> is a Sony corporate startup that sells a range of colored blocks with different sensors and wireless connection to the IoT. It’s digital DIY platform to connect everyday objects into IoT and <a href="https://www.bundl.com/articles/examples-sony-launch-and-crowdfund-iot-corporate-startup">create your own projects</a>. - MESH blocks are wireless - Visual Coding App called Canvas simplifies programming and wiring with drag-and-drop functions - project can be connected to web services and popular smart gadgets like WeMo and Google Assistant voice activation - hardware projects can be expanded without expertise - IoT block in the project allows additions of smart features such as motion-sensitivity, remote control, orientation monitoring, voice commands, notifications, text messaging and more - projects can be connected to the internet instantly - project can be transformed into an IoT device, such as - Twitter alarm system - a voice-activated, data-logging, remote-controlled car - allows customization of smart gadgets - MESH is compatible with over 350 smart gadgets, home automation devices and web services on IFTTT - each IoT block has built-in IFTTT integration, so that it’s simple to add custom features on a smart gadget - MESH Motion and MESH Temperature &amp; Humidity used together allow addition of motion-activated, multi-room temperature monitoring to a smart device like Nest thermostat - allows to build own smart gadget - MESH GPIO is a simple interface for development boards like Arduino and Raspberry Pi or actuators like a DC motor - MESH GPIO integrates any smart devices or web services on IFTTT, incl. - Amazon Alexa for Echo - Google Assistant - Google Sheets - LIFX - Nest - Phillips Hue - Twitter - WeMo - over 350 more - MESH blocks use Bluetooth - MESH blocks are rechargeable, durable and compact</p>
+</section>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources:</h2>
+<p><a href="https://www.mdpi.com/2079-9292/11/4/573">On-Device Training of Machine Learning Models on Microcontrollers with Federated Learning</a></p>
+<p><a href="https://ieeexplore.ieee.org/abstract/document/9767250">TinyFedTL: Federated Transfer Learning on Ubiquitous Tiny IoT Devices</a></p>
+<p><a href="https://www.edgeimpulse.com/">Edge Impulse</a></p>
+<p><a href="https://www.analog.com/en/design-center/landing-pages/001/beginners-guide-to-dsp.html">Beginner’s Guide to DSP</a></p>
+<p><a href="https://keras.io/">Keras APIs</a></p>
+<p><a href="https://www.arduino.cc/">Arduino</a></p>
+<p><a href="https://www.arduino.cc/en/Guide">Arduino Getting started guide</a></p>
+<p><a href="https://projecthub.arduino.cc/">Arduino Tutorials on Arduino Project Hub</a></p>
+<p><a href="https://www.arm.com/products/development-tools/embedded-and-software/mbed-os">Mbed</a></p>
+<p><a href="https://os.mbed.com/">Mbed (product)</a></p>
+<p><a href="https://ifttt.com/">IFTTT</a></p>
+<p><a href="https://meshprj.com/en/">MESH blocks</a></p>
+<p><a href="http://wiring.org.co/">Wiring</a></p>
+<p><a href="https://eu.robotshop.com/">Wiring webshop</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

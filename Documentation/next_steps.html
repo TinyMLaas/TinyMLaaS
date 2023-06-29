@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>TinyMLaaS-main - Suggestions for further development</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="TinyMLaaS-main - Suggestions for further development">
+<meta property="og:description" content="">
+<meta property="og:site-name" content="TinyMLaaS-main">
+<meta name="twitter:title" content="TinyMLaaS-main - Suggestions for further development">
+<meta name="twitter:description" content="">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">TinyMLaaS-main</span>
+    </a>
+  </div>
+        <div class="quarto-navbar-tools ms-auto">
+</div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Documentation/architecture.html">Documentation</a></li><li class="breadcrumb-item"><a href="../Documentation/next_steps.html">Suggestions for further development</a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TinyMLaaS-main</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Bridge</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Bridge/installing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">installing.html</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Bridge/observing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">observing.html</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Documentation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/architecture.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Architecture</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/background.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Background information and some literature sources</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/demonstration.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Demonstratation of TinyMLaaS WebApp</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/next_steps.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Suggestions for further development</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/software-project-summer-kick-off.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Project starting point</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/technologies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Technological choices</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Documentation/use_cases.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Use case scenarios</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Tensorflow</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Tensorflow/compiling.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">compiling.html</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Tensorflow/training.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">training.html</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#work-in-progress-isolate-tensorflow-from-backend" id="toc-work-in-progress-isolate-tensorflow-from-backend" class="nav-link active" data-scroll-target="#work-in-progress-isolate-tensorflow-from-backend">Work in progress: Isolate tensorflow from backend</a></li>
+  <li><a href="#database" id="toc-database" class="nav-link" data-scroll-target="#database">Database</a>
+  <ul class="collapse">
+  <li><a href="#production-ready-database" id="toc-production-ready-database" class="nav-link" data-scroll-target="#production-ready-database">Production ready database</a></li>
+  <li><a href="#move-saving-of-models-and-datasets-to-database" id="toc-move-saving-of-models-and-datasets-to-database" class="nav-link" data-scroll-target="#move-saving-of-models-and-datasets-to-database">Move saving of models and datasets to database</a></li>
+  </ul></li>
+  <li><a href="#datasets" id="toc-datasets" class="nav-link" data-scroll-target="#datasets">Datasets</a>
+  <ul class="collapse">
+  <li><a href="#downloadinguploading-datasets-as-zip" id="toc-downloadinguploading-datasets-as-zip" class="nav-link" data-scroll-target="#downloadinguploading-datasets-as-zip">Downloading/uploading datasets (as zip)</a></li>
+  <li><a href="#editing-deleting-and-managing-datasets" id="toc-editing-deleting-and-managing-datasets" class="nav-link" data-scroll-target="#editing-deleting-and-managing-datasets">Editing, deleting and managing datasets</a></li>
+  </ul></li>
+  <li><a href="#cli" id="toc-cli" class="nav-link" data-scroll-target="#cli">CLI</a>
+  <ul class="collapse">
+  <li><a href="#add-missing-functionality-fixes-to-existing" id="toc-add-missing-functionality-fixes-to-existing" class="nav-link" data-scroll-target="#add-missing-functionality-fixes-to-existing">Add missing functionality + fixes to existing</a></li>
+  <li><a href="#autogenerate-end-to-end-cli-from-openapi-yaml" id="toc-autogenerate-end-to-end-cli-from-openapi-yaml" class="nav-link" data-scroll-target="#autogenerate-end-to-end-cli-from-openapi-yaml">Autogenerate end-to-end CLI from OpenAPI YAML</a></li>
+  </ul></li>
+  <li><a href="#bridge" id="toc-bridge" class="nav-link" data-scroll-target="#bridge">Bridge</a>
+  <ul class="collapse">
+  <li><a href="#support-for-raspberry-pi" id="toc-support-for-raspberry-pi" class="nav-link" data-scroll-target="#support-for-raspberry-pi">Support for Raspberry PI</a></li>
+  <li><a href="#bridge-port" id="toc-bridge-port" class="nav-link" data-scroll-target="#bridge-port">Bridge port</a></li>
+  <li><a href="#error-handling" id="toc-error-handling" class="nav-link" data-scroll-target="#error-handling">Error handling</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/JeHugawa/TinyMLaaS-main/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Suggestions for further development</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="work-in-progress-isolate-tensorflow-from-backend" class="level2">
+<h2 class="anchored" data-anchor-id="work-in-progress-isolate-tensorflow-from-backend">Work in progress: Isolate tensorflow from backend</h2>
+<p>The TinyMLaaS and TinyML-backend repositories both contain a branch called <code>dockerize_tensorflow</code>. These branches contain unfinished development for a feature where the backend does not contain any machine learning libraries but only works as a relay for training and compiling machine learning models. The idea is, that the backend spins up a docker container that contains the machine learning library (currently Tensorflow) and uses it to train an compile models. The model files are then extracted from this Tensorflow container to the filesystem of the container where the backend is running.</p>
+<p>Compiling a tensorflow model for MCU works if there is a model in the tensorflow_models folder and database. Training a new model does not yet work. Some of the backend code is commented out and this feature is very much work in progress.</p>
+<p>The feature works with Docker in Docker (dind) using the <a href="https://github.com/nestybox/sysbox">nestybox/sysbox runtime environment</a> which allows a container to run docker without privileged mode / giving access to local docker sockets. This is a bit complicated, but more secure than the alternatives. The same dind principle is also used for running the relay/bridge that is used to install and observe the MCU devices (see https://github.com/TinyMLaas/TinyML-MCU).</p>
+<p>The <code>dockerize_tensorflow</code> branch contains a <a href="https://github.com/TinyMLaas/TinyMLaaS/blob/dockerize_tensorflow/backend_no_tf.Dockerfile">Dockerfile</a> that sets up the Tensorflow docker image. In order to develop this feature, you need to work on both repositories TinyMLaaS and TinyML-backend simultaneously. The docker-compile in TinyMLaaS <code>dockerize_tensorflow</code> branch uses backend_no_tf.Dockerfile to pull the <code>dockerize_tensorflow</code> branch from the TinyML-backend repo.</p>
+<p>Our FastAPI backend communicates with the docker image and containers using <a href="https://docs.docker.com/engine/api/">Docker API</a> and more specifically the <a href="https://docker-py.readthedocs.io/en/stable/index.html">Docker SDK for Python</a>. The feature is implemented in the <a href="https://github.com/TinyMLaas/TinyML-backend/blob/dockerize_tensorflow/tf_docker/compile.py">tf_docker/compile.py</a> backend module.</p>
+</section>
+<section id="database" class="level2">
+<h2 class="anchored" data-anchor-id="database">Database</h2>
+<section id="production-ready-database" class="level3">
+<h3 class="anchored" data-anchor-id="production-ready-database">Production ready database</h3>
+<p>The backend uses <a href="https://www.sqlite.org/index.html">SQLite</a>. However, as SQlite is so lightweight, there are drawbacks, that affect the usage of the software. First of all, SQLite is not meant for storing big files. Because of this, all datasets, models and compiled models are stored <strong>outside</strong> the database in directories, and the database contains the <strong>path</strong> to the files. This is not ideal, as the backend can get messy with all the directories and if permanent storage is required outside the docker container, all of these volumes need to be mounted to the docker container.</p>
+<p>A SQLite database is also a single file, meaning that accidentally deleting the database or misplacing it is more common.</p>
+<p>Because of these drawbacks, we would suggest changing the used database from SQLite to something more robust and production ready, such as <a href="https://mariadb.org/">MariaDB</a> or <a href="https://www.postgresql.org/">PostgreSQL</a>. Larger files can be stored in these databases and it is easy to mount one database rather than multiple different locations for all different saving locations.</p>
+</section>
+<section id="move-saving-of-models-and-datasets-to-database" class="level3">
+<h3 class="anchored" data-anchor-id="move-saving-of-models-and-datasets-to-database">Move saving of models and datasets to database</h3>
+<p>As mentioned in the previous <a href="#production-ready-database">section</a>, all datasets and models are stored outside the database. With the change of the database, it would be better to save all these files in the database.</p>
+</section>
+</section>
+<section id="datasets" class="level2">
+<h2 class="anchored" data-anchor-id="datasets">Datasets</h2>
+<section id="downloadinguploading-datasets-as-zip" class="level3">
+<h3 class="anchored" data-anchor-id="downloadinguploading-datasets-as-zip">Downloading/uploading datasets (as zip)</h3>
+<p>Currently, you can only upload and append to datasets. It’s not possible to view or download it anyway. The application should have way to download the entire dataset to your machine (propably as zip so it works on both Windows and Linux).</p>
+<p>At the moment you can only send bulk of pictures of to the app to create a dataset. It’s propably good idea to allow sending zips and creating datasets from them. You propably need to make sure that - it’s a valid dataset with working images - the saved dataset keeps same folder structure as the send zip - the user doesn’t send malicious data</p>
+</section>
+<section id="editing-deleting-and-managing-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="editing-deleting-and-managing-datasets">Editing, deleting and managing datasets</h3>
+<p>Currently, only adding and appending datasets is supported. The user should propably be able to manage the datasets better. First you should be able to remove unwanted datasets. Second, the user should be able to make folder structure for the datasets and edit them for labeling purposes <a href="https://www.tensorflow.org/tutorials/images/classification#download_and_explore_the_dataset">see this tutorial for example how the data is structured</a>. Being able to simply download the datasets,editing it locally, removing it from the app and readding it allows for the user to edit it. After that, if you want to enhance the user experience one idea is to add better editing options to the app itself: Being able remove photos, being able to add photos, creating new folders, removing folders.</p>
+</section>
+</section>
+<section id="cli" class="level2">
+<h2 class="anchored" data-anchor-id="cli">CLI</h2>
+<p>The CLI is mostly autogenerated with <a href="https://openapi-generator.tech/">this</a> OpenAPI Generator. The current generator works as far as the existing API endpoints stay the same regarding input and output. Whenever new HTTP methods are added or modified a new generation has to be done. This can be done by using the json-file provided by the FastAPI backend. See detailed instructions <a href="https://github.com/TinyMLaas/TinyML-CLI#generating-a-python-cli-tool">here</a>.</p>
+<section id="add-missing-functionality-fixes-to-existing" class="level3">
+<h3 class="anchored" data-anchor-id="add-missing-functionality-fixes-to-existing">Add missing functionality + fixes to existing</h3>
+<p>Only some of the functionality is available with the CLI. See examples from the already implemented functionality from <a href="https://github.com/TinyMLaas/TinyML-CLI/tree/main/services">services</a> and <a href="https://github.com/TinyMLaas/TinyML-CLI/blob/main/tinyml_cli.py">tiny_mlaas.py</a>. To help with implementing more functionality, see examples for using the client from the docs. For example for bridges <a href="https://github.com/TinyMLaas/TinyML-CLI/blob/main/docs/apis/tags/BridgesApi.md">here</a>.</p>
+<p>Adding and listing existing devices isn’t working properly because newly added devices don’t have a designated bridge. It’s worth considering if adding a device should be possible without a bridge. This fix would be implemented in backend. Alternative fix is to modify the validation done by the generated client.</p>
+<p>Training via the CLI trains a model, but the output contains a picture that can’t be displayed in CLI. A possible fix is to modify the training function so that displaying an example of a prediction is optional.</p>
+<p>Many of the functions have hardcoded parameters. This helps with development and testing, but should be fixed in the future. See example of adding parameters: https://github.com/TinyMLaas/TinyML-CLI/blob/main/services/models.py . Here dataset_id and description are required parameters. Epoch and the rest of the hard coded variables can be handled in a similar fashion.</p>
+</section>
+<section id="autogenerate-end-to-end-cli-from-openapi-yaml" class="level3">
+<h3 class="anchored" data-anchor-id="autogenerate-end-to-end-cli-from-openapi-yaml">Autogenerate end-to-end CLI from OpenAPI YAML</h3>
+<p>The current version of the <a href="https://github.com/TinyMLaas/TinyML-CLI">CLI</a> is autogenerated with the exception of <a href="https://github.com/TinyMLaas/TinyML-CLI/tree/main/services">services</a> and <a href="https://github.com/TinyMLaas/TinyML-CLI/blob/main/tinyml_cli.py">tiny_mlaas.py</a>.</p>
+<p>End-to-end autogeneration could be done after publishing services and tiny-mlaas.py as a Python package and having it as a dependency. See instructions: https://typer.tiangolo.com/tutorial/package/.</p>
+<p>A preliminary idea for implementing the end-to-end generation is following:</p>
+<ol type="1">
+<li><p>Publish a package that contains the forementioned files</p></li>
+<li><p>OpenAPI yaml-file is needed for generating the CLI tool. Get it by browsing to backend_url/openapi.json. Convert the json to yaml with for example: https://editor.swagger.io/</p></li>
+</ol>
+<p>The repository for autogeneration would consist of the yaml -file from step 2 and requirements.txt -file with the package published in step 1 (in addition to current requirements). With these prerequisites the steps for end-to-end generation could be:</p>
+<ol type="1">
+<li><p>Clone repo</p></li>
+<li><p>Install the generator tool with: npm install <span class="citation" data-cites="openapitools/openapi-generator-cli">@openapitools/openapi-generator-cli</span> -g</p></li>
+<li><p>Generate the client with npx <span class="citation" data-cites="openapitools/openapi-generator-cli">@openapitools/openapi-generator-cli</span> generate -i file.yaml -g python -o <em>output_path</em></p>
+<ul>
+<li>file.yaml is the yaml-file in the repo</li>
+<li>output path should probably be the root directory of the cloned CLI-repository</li>
+</ul></li>
+<li><p>Install the requirements: pip install -r requirements.txt</p></li>
+<li><p>Finish the installation with: python3 setup.py install</p></li>
+</ol>
+<p>For usage instructions see: https://github.com/TinyMLaas/TinyML-CLI#usage</p>
+<p>Misc: if requirements.txt is overwritten by the generator use a different name, interface_requirements.txt etc (remember to install these in step 4). Using the CLI package might differ from using it locally, see Typer documentation: https://typer.tiangolo.com/tutorial/package/</p>
+</section>
+</section>
+<section id="bridge" class="level2">
+<h2 class="anchored" data-anchor-id="bridge">Bridge</h2>
+<section id="support-for-raspberry-pi" class="level3">
+<h3 class="anchored" data-anchor-id="support-for-raspberry-pi">Support for Raspberry PI</h3>
+<p>Installation and observation for Arduino nano 33 BLE has been imported fully to this version of the version. However, the Raspberry PI support has not been tested at all and most likely will not work out of the box. Adding support/making sure installation to Raspberries work is a required feature, that unfortunately does not exist yet.</p>
+</section>
+<section id="bridge-port" class="level3">
+<h3 class="anchored" data-anchor-id="bridge-port">Bridge port</h3>
+<p>A bridge can be saved to the backend as an IP address and as an URL. There is right now no validation to make sure that the given IP address or URL is a valid address. Also, if IP address is used, it automatically asumes that the bridge is hosted on port 5000. This should be changed so that the bridge can be hosted on any port.</p>
+</section>
+<section id="error-handling" class="level3">
+<h3 class="anchored" data-anchor-id="error-handling">Error handling</h3>
+<p>There is little to none error handling on the bridge. This means that, even if operations fail, it will still say the operation was successfull. The next ones are known errors that do not have error handling:</p>
+<ul>
+<li><p>When the compiled arduino sketch is uploaded successfully, but it can not be started for some reason, most likely because there isn’t enough memory for model on the device.</p></li>
+<li><p>Observation doesn’t have permission to the device.</p></li>
+</ul>
+<p>The installation process has a chance to fail when running inside a docker container and the reason is unknown.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
